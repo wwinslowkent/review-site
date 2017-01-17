@@ -26,3 +26,5 @@ Things you may want to cover:
 ![Build Status](https://codeship.com/projects/42a56450-bf10-0134-11d8-0ef15c5d34cb/status?branch=master)
 ![Code Climate](https://codeclimate.com/github/wwinslowkent/review-site.png)
 ![Coverage Status](https://coveralls.io/repos/wwinslowkent/review-site/badge.png)
+
+this should be added back to confirmation_instructions.html.erb later <p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
