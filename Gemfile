@@ -25,8 +25,12 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
-
+# foundation formatting
 gem 'foundation-rails'
+# integrating recaptcha
+gem 'dotenv-rails', :require => 'dotenv/rails-now'
+# recaptcha gem
+gem "recaptcha", require: "recaptcha/rails"
 
 
 group :development, :test do
@@ -41,6 +45,7 @@ group :development, :test do
   gem 'omniauth'
   gem 'omniauth-google-oauth2'
   gem 'sprockets', '3.7.1'
+
 end
 
 group :development do
