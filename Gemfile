@@ -37,6 +37,10 @@ group :development, :test do
   gem 'factory_girl'
   gem 'valid_attribute'
   gem 'shoulda-matchers', require: false
+  gem 'devise'
+  gem 'omniauth'
+  gem 'omniauth-google-oauth2'
+  gem 'sprockets', '3.7.1'
 end
 
 group :development do
