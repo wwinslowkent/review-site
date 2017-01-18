@@ -10,7 +10,7 @@ feature 'sign up' do
     fill_in "Password", with: "HarryPotter"
     fill_in "Password confirmation", with: "HarryPotter"
     click_button "Sign up"
-    expect(page).to have_content "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
+    expect(page).to have_content "Welcome! You have signed up successfully."
   end
 
   scenario 'required information is not supplied' do
