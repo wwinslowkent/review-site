@@ -2,20 +2,31 @@ require 'spec_helper'
 require 'rails_helper'
 
 feature 'sign in' do
-  scenario 'user with no email confirmation tries to sign in' do
-    visit root_path
-    click_link "Sign up"
-    fill_in "Name", with: "Hermione Granger"
-    fill_in "Email", with: "harry@potter.com"
-    fill_in "Password", with: "HarryPotter"
-    fill_in "Password confirmation", with: "HarryPotter"
-    click_button "Sign up"
+  scenario 'user signs in successfully' do
+    FactoryGirl.create(:user)
     visit root_path
     click_link "Log in"
     fill_in "Email", with: "harry@potter.com"
     fill_in "Password", with: "HarryPotter"
     click_button "Log in"
-    expect(page).to have_content "You have to confirm your email address before continuing."
+    expect(page).to have_content "Signed in successfully."
+  end
+  scenario 'user email is invalid' do
+    visit root_path
+    click_link "Log in"
+    fill_in "Email", with: "h"
+    fill_in "Password", with: "HarryPotter"
+    click_button "Log in"
+    expect(page).to have_content "Invalid Email or password."
+  end
+  scenario 'user password is incorrect' do
+    FactoryGirl.create(:user)
+    visit root_path
+    click_link "Log in"
+    fill_in "Email", with: "harry@potter.com"
+    fill_in "Password", with: "HarryPooter"
+    click_button "Log in"
+    expect(page).to have_content "Invalid Email or password."
   end
 
 
