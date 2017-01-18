@@ -11,6 +11,7 @@ feature 'sign in' do
     click_button "Log in"
     expect(page).to have_content "Signed in successfully."
   end
+
   scenario 'user email is invalid' do
     visit root_path
     click_link "Log in"
@@ -19,6 +20,7 @@ feature 'sign in' do
     click_button "Log in"
     expect(page).to have_content "Invalid Email or password."
   end
+  
   scenario 'user password is incorrect' do
     FactoryGirl.create(:user)
     visit root_path
