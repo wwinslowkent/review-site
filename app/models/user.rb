@@ -4,5 +4,5 @@ class User < ApplicationRecord
   validates :name, uniqueness: { message: "that username is already in use" }
   validates :name, presence: true
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :confirmable, :rememberable, :validatable
 end
