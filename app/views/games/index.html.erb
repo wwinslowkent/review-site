@@ -1,8 +1,15 @@
 
-<h1>All Games</h1>
+<h1>Game List</h1>
 
-<% @games.each do |game| %>
-  <p>
-    <%= link_to game.name, game_path(game.id) %>: <%= game.summary %>
-  </p>
+<% if @games.blank? %>
+  <h4>There are no games containing the term <%= params[:search] %>.</h4>
+
+<% else %>
+
+  <% @games.each do |game| %>
+    <p>
+      <%= link_to game.name, game_path(game.id) %>: <%= game.summary %>
+    </p>
+  <% end %>
+
 <% end %>

@@ -29,6 +29,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'foundation-rails'
 # devise for making user accounts
 gem 'devise'
+# Enables serving assets in production and logging aggregation
+gem 'rails_12factor', group: :production
 
 
 
