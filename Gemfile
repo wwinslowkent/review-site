@@ -25,8 +25,11 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
-
+# foundation Formatting
 gem 'foundation-rails'
+# devise for making user accounts
+gem 'devise'
+
 
 
 group :development, :test do
