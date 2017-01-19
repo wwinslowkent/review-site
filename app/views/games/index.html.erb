@@ -1,8 +1,7 @@
-<h1>Game List</h1>
-
 <% if @games.blank? %>
   <div id='index'>
     <h4>There are no games containing the term <%= params[:search] %>.</h4>
+    <%= button_to "Add a Game from IGDB", api_index_path, method: :get %>
   </div>
 <% else %>
   <div id='games'>

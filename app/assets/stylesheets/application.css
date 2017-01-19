@@ -26,13 +26,12 @@
 }
 
 #core {
-  background: linear-gradient(rgba(0,0,0, .5), rgba(0,0,0,.5)), url(./orion.jpg) repeat center center fixed;
+  background: url(./orion.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
   color: #ffffff;
-  padding-bottom: 300px;
+  padding-bottom: 500px;
 }
 
 
@@ -74,4 +73,8 @@
 
 #pic {
   height: 100%;
+}
+
+#title {
+  background-color: #443B3F;
 }
