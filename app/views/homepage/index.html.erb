@@ -1,12 +1,8 @@
 <div id='homepage'>
-
-
-<p>
-
-
-<%= form_tag(games_path, :method => "get", id: "search-form") do %>
-   <%= text_field_tag :search, params[:search], placeholder: "Search Games" %>
-   <div class='text-center'><%= submit_tag "Search", :name => nil, id: 'black'%> </div>
-<% end %>
-</p>
+  <p>
+    <%= form_tag(games_path, :method => "get", id: "search-form") do %>
+       <%= text_field_tag :search, params[:search], placeholder: "Search Games" %>
+       <div class='text-center'><%= submit_tag "Search", :name => nil, id: 'black'%> </div>
+    <% end %>
+  </p>
 </div>

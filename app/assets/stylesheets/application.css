@@ -72,9 +72,18 @@
 }
 
 #pic {
-  height: 100%;
+  padding: 10px;
 }
 
 #title {
   background-color: #443B3F;
+}
+
+#gameshow {
+  padding: 50px;
+}
+
+#ha {
+  padding-left: 50px;
+  padding-right: 50px;
 }

@@ -1,7 +1,32 @@
-<img src="https://<%= @game.cover_url %>"></img><h1><%= @game.name %></h1>
+<div class='small-12 columns' id='gameshow'>
+  <img src="https://<%= @game.cover_url %>" class='small-2 columns'></img>
+  <h1 class='small-10 columns'><%= @game.name %></h1>
+</div>
+<div id = 'ha'>
+  <p><%= @game.summary %></p>
+</div>
 
-<h2><%= @game.summary %></h2>
+<% if user_signed_in? %>
+  <p>
+    <%= form_for [@game, @review] do |f| %>
+      <%= f.label :rating, "Rating (Required):" %>
+      <%= f.text_field :rating %>
+      <%= f.label :comment, "Comment (Optional):" %>
+      <%= f.text_field :comment %>
+      <%= f.submit value='Post Review'%>
+    <% end %>
+  </p>
+<% end %>
 
-<p>
-  <%= link_to "Home", root_path %>
-</p>
+<% if @reviews %>
+  <% @reviews.each do |review| %>
+    <%= review.rating %>
+      <% if review.user %>
+        <%= review.user.name %>
+      <% end %>
+
+      <% if review.comment %>
+        <%= review.comment %>
+      <% end %>
+  <% end %>
+<% end %>
