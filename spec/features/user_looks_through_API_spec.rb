@@ -10,6 +10,6 @@ feature "user can search through the API" do
     fill_in "Search IGDB Database", with: "Mario"
     click_on "Search"
 
-    expect(page).to have_content("Super Mario Odyssey")
+    expect(page).to have_content("Super Mario World")
   end
 end
