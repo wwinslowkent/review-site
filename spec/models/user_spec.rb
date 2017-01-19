@@ -5,7 +5,7 @@ describe User do
   it { should have_valid(:name).when('Harry Potter', 'Hermione') }
   it { should_not have_valid(:name).when(nil, '') }
 
-  it { should have_valid(:email).when('harry@potter.com', 'hermione@granger.com') }
+  it { should have_valid(:email).when('harry@snape.com', 'hermione@snape.com') }
   it { should_not have_valid(:email).when(nil, '') }
 
   it 'has a matching password confirmation for the password' do

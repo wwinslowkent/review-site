@@ -17,7 +17,7 @@ feature "games navigation" do
 
   scenario "visitor goes to an individual game page" do
     game = FactoryGirl.create(:game)
-    gameb = FactoryGirl.create(:game, name: "Pokemon Moon", summary: 'Test')
+    gameb = FactoryGirl.create(:game, name: "Pokemon Mun", summary: 'Test')
 
     visit root_path
     click_link "All Games"
