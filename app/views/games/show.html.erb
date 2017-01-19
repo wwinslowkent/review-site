@@ -2,6 +2,14 @@
 
 <h2><%= @game.summary %></h2>
 
+<h2>Reviews:</h2>
+<% @reviews.each do |review| %>
+  <p>
+    <%= review.rating %>
+    <%= review.comment %>
+  </p>
+<% end %>
+<%= render 'reviews/form' %>
 <p>
   <%= link_to "Home", root_path %>
 </p>
