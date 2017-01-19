@@ -5,9 +5,9 @@
        <div class='text-center'><%= submit_tag "Search", :name => nil, id: 'black'%> </div>
     <% end %>
   </p>
-
+<% if @search %>
   <% if @games == [] %>
-    <h4>There are no games containing the term <%= @search %>.</h4>
+    <h4>There are no games containing the term "<%= @search %>"</h4>
   <% else %>
     <% @games.each do |body|  %>
       <p class='large-12 columns small-12 columns medium-12 columns'>
@@ -24,4 +24,5 @@
       </p>
     <% end %>
   <% end %>
+<% end %>
 </div>

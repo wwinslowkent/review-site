@@ -6,6 +6,18 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Game.create(name: 'Pokemon Sun', summary: "Pokémon Sun and Pokémon Moon trademarks were registered thus leaking the next Pokémon game titles to the public. Pokémon.com confirmed the games would be for the Nintendo 3DS and released in holiday 2016, with a new world, new Pokémon, and new adventures. Pokémon Sun and Pokémon Moon will be the first games in the Pokémon series to allow players to choose from nine languages to play in. In addition to English, French, German, Italian, Japanese, Korean, and Spanish, players will now be able to play in both Traditional and Simplified Chinese.", cover_url: "images.igdb.com/igdb/image/upload/t_thumb/aoeuitjpvoky1gqwf7cg.png")
-Game.create(name: 'Pokemon Moon', summary: "Pokémon Sun and Pokémon Moon trademarks were registered thus leaking the next Pokémon game titles to the public. Pokémon.com confirmed the games would be for the Nintendo 3DS and released in holiday 2016, with a new world, new Pokémon, and new adventures. Pokémon Sun and Pokémon Moon will be the first games in the Pokémon series to allow players to choose from nine languages to play in. In addition to English, French, German, Italian, Japanese, Korean, and Spanish, players will now be able to play in both Traditional and Simplified Chinese.", cover_url: "images.igdb.com/igdb/image/upload/t_thumb/a52al5isjxc6arqghbe0.png")
-Game.create(name: 'Pokemon Snap', summary: "Traverse various areas and take photographs of different types of Pokémon by discovering their secrets. Capture the perfect frame to gain bonus points from Professor Oak in order to unlock helpful items and locate and photograph the elusive Mew, a legendary Pokémon whose existence has never been recorded.", cover_url: "images.igdb.com/igdb/image/upload/t_thumb/z7orze44iqcsadcy54ae.png")
+# @games = []
+# @search = 'zelda'
+# @client = HTTPClient.new
+# @uri = "https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=*&limit=50&offset=0"
+# @response = @client.get(@uri, :query => {:search => @search }, :header => { :"X-Mashape-Key" => 'TeipM9suCkmshT1wgcmfsmAr5qS5p1Wr5BKjsnn6122WXCp8L8', :"Accept" => 'application/json'}).body
+# @parsed = JSON.parse(@response)
+# @parsed.each do |body|
+#   if (body['cover']) && (body['name']) && (body['summary'])
+#     @games << body
+#   end
+# end
+#
+# @games.each do |game|
+#   Game.create(name: game['name'], summary: game['summary'], cover_url: game['cover']['url'])
+# end
