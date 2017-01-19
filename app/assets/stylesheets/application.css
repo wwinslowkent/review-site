@@ -19,3 +19,59 @@
  .top-bar {
   margin-bottom: 30px;
 }
+
+#logo {
+  width: 25px;
+  height: 25px;
+}
+
+#core {
+  background: linear-gradient(rgba(0,0,0, .5), rgba(0,0,0,.5)), url(./orion.jpg) repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: #ffffff;
+  padding-bottom: 300px;
+}
+
+
+#homepage {
+  padding-top: 225px;
+  padding-bottom: 225px;
+  padding-left: 300px;
+  padding-right: 300px;
+}
+
+#index {
+  padding-top: 200px;
+  padding-bottom: 250px;
+  padding-left: 200px;
+  padding-right: 200px;
+  text-align: center;
+  font-size: 50px;
+  color: #ffffff;
+}
+
+#black {
+  color: #000000;
+}
+
+#games {
+  padding-top: 50px;
+  padding-bottom: 500px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+#flash {
+
+}
+
+#space {
+
+}
+
+#pic {
+  height: 100%;
+}
