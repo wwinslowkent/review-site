@@ -1,15 +1,20 @@
-
 <h1>Game List</h1>
 
 <% if @games.blank? %>
-  <h4>There are no games containing the term <%= params[:search] %>.</h4>
-
+  <div id='index'>
+    <h4>There are no games containing the term <%= params[:search] %>.</h4>
+  </div>
 <% else %>
-
-  <% @games.each do |game| %>
-    <p>
-      <%= link_to game.name, game_path(game.id) %>: <%= game.summary %>
-    </p>
-  <% end %>
-
+  <div id='games'>
+    <% @games.each do |game| %>
+      <div id='space' class='small-12 columns row'>
+        <div class='small-2 columns' id='pic'>
+          <img src="https://<%= game.cover_url %>"/>
+        </div>
+        <div class='small-10 columns'>
+          <%= link_to game.name, game_path(game.id) %>: <%= game.summary %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>
