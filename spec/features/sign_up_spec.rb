@@ -5,8 +5,8 @@ feature 'sign up' do
   scenario 'valid user signs up' do
     visit root_path
     click_link "Sign up"
-    fill_in "Name", with: "Hermione Granger"
-    fill_in "Email", with: "harry@potter.com"
+    fill_in "Name", with: "Snape Granger"
+    fill_in "Email", with: "Severus@snape.com"
     fill_in "Password", with: "HarryPotter"
     fill_in "Password confirmation", with: "HarryPotter"
     click_button "Sign up"
