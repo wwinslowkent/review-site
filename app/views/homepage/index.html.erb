@@ -1,12 +1,12 @@
-<h1>Cool Game Reviews</h1>
+<div id='homepage'>
+
+
+<p>
+
 
 <%= form_tag(games_path, :method => "get", id: "search-form") do %>
    <%= text_field_tag :search, params[:search], placeholder: "Search Games" %>
-   <%= submit_tag "Search", :name => nil %>
+   <div class='text-center'><%= submit_tag "Search", :name => nil, id: 'black'%> </div>
 <% end %>
-
-<%= link_to 'Sign up', new_user_registration_path %>
-
-<%= link_to 'All Games', games_path %>
-<%= link_to 'Log in', new_user_session_path %>
-<%= link_to 'log out', destroy_user_session_path %>
+</p>
+</div>
