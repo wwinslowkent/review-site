@@ -5,28 +5,33 @@
 <div id = 'ha'>
   <p><%= @game.summary %></p>
 </div>
-
-<% if user_signed_in? %>
-  <p>
-    <%= form_for [@game, @review] do |f| %>
-      <%= f.label :rating, "Rating (Required):" %>
-      <%= f.text_field :rating %>
-      <%= f.label :comment, "Comment (Optional):" %>
-      <%= f.text_field :comment %>
-      <%= f.submit value='Post Review'%>
-    <% end %>
-  </p>
-<% end %>
-
-<% if @reviews %>
-  <% @reviews.each do |review| %>
-    <%= review.rating %>
-      <% if review.user %>
-        <%= review.user.name %>
+<div id='form'>
+  <% if user_signed_in? %>
+    <p>
+      <%= form_for [@game, @review] do |f| %>
+        <%= f.label :rating, "Rating (Required):" %>
+        <%= f.text_field :rating %>
+        <%= f.label :comment, "Comment (Optional):" %>
+        <%= f.text_field :comment %>
+        <%= f.submit value='Post Review'%>
       <% end %>
-
-      <% if review.comment %>
-        <%= review.comment %>
-      <% end %>
+    </p>
+    <% else %>
+    <%= button_to 'Sign In to Post a Review', new_user_session_path %>
   <% end %>
-<% end %>
+
+  <% if @reviews %>
+  <h2>Reviews:</h2>
+    <% @reviews.each do |review| %>
+      <h4>
+        <% if review.user %>
+          <%= review.user.name %> gave this game <%= review.rating %> out of 5 stars
+        <% end %>
+        <br />
+        <% if review.comment %>
+          Comment: <%= review.comment %>
+        <% end %>
+      </h4>
+    <% end %>
+  <% end %>
+</div>

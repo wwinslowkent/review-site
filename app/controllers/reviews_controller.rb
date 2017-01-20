@@ -15,7 +15,7 @@ class ReviewsController < ApplicationController
       flash[:notice] = "Review saved successfully."
       redirect_to game_path(@game)
     else
-      flash[:alert] = "Failed to save review."
+      flash[:alert] = @review.errors.full_messages.to_sentence
       redirect_to game_path(@game)
     end
   end
