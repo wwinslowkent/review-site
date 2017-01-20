@@ -9,7 +9,6 @@ class ReviewsController < ApplicationController
     @game = Game.find(params[:game_id])
     @review = Review.new(params_strong)
     @review.game = @game
-    @game.reviews = @reviews
     @review.user = current_user
 
     if @review.save
