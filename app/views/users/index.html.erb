@@ -1,0 +1,4 @@
+<h2>User List</h2>
+<% @users.each do |user| %>
+  <%= user.name %><%= button_to "Delete User Account", user, method: :delete, data: { confirm: "You sure?" } %>
+<% end %>

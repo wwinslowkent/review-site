@@ -9,7 +9,7 @@ class ReviewsController < ApplicationController
     @game = Game.find(params[:game_id])
     @review = Review.new(params_strong)
     @review.game = @game
-    @reviews = @game.reviews
+    @game.reviews = @reviews
     @review.user = current_user
 
     if @review.save
@@ -18,6 +18,23 @@ class ReviewsController < ApplicationController
     else
       flash[:notice] = @review.errors.full_messages.to_sentence
       render '/games/show'
+    end
+  end
+
+  def edit
+  end
+
+  def update
+  end
+
+  def destroy
+    @review = Review.find(params[:id])
+    if (current_user == @review.user) || admin_signed_in?
+      @review.destroy
+      redirect_to game_path(params[:game_id])
+    else
+      flash[:alert] = "UNAUTHORIZED"
+      redirect_to review_path(@review)
     end
   end
 
