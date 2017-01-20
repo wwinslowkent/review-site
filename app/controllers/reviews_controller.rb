@@ -1,6 +1,10 @@
 class ReviewsController < ApplicationController
 
-  # POST /resource
+  def new
+    @game = Game.find(params[:id])
+    @review = Review.new
+  end
+
   def create
     @game = Game.find(params[:game_id])
     @review = Review.new(params_strong)
@@ -17,29 +21,13 @@ class ReviewsController < ApplicationController
     end
   end
 
-
-
-  # # GET /resource/edit
-  # def edit
-  #   super
-  # end
-  #
-  # # PUT /resource
-  # def update
-  #   super
-  # end
-  #
-  # # DELETE /resource
-  # def destroy
-  #   super
-  # end
-
-
   private
-    def params_strong
-      params.require(:review).permit(
-        :rating,
-        :comment
-        )
-    end
+
+  def params_strong
+    params.require(:review).permit(
+      :rating,
+      :comment
+      )
+  end
+
 end

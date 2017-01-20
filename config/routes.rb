@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :homepage
 
   resources :games, only: [:index, :show] do
-    resources :reviews
+    resources :reviews, only: [:new, :create]
   end
 
   resources :api, only: [:index]

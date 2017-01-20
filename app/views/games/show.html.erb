@@ -1,16 +1,32 @@
-<img src="https://<%= @game.cover_url %>"></img><h1><%= @game.name %></h1>
+<div class='small-12 columns' id='gameshow'>
+  <img src="https://<%= @game.cover_url %>" class='small-2 columns'></img>
+  <h1 class='small-10 columns'><%= @game.name %></h1>
+</div>
+<div id = 'ha'>
+  <p><%= @game.summary %></p>
+</div>
+<div id='form'>
+  <% if user_signed_in? %>
+    <%= render 'reviews/form' %>
+  <% else %>
+    <%= button_to 'Sign In to Post a Review', new_user_session_path %>
+  <% end %>
 
-<h2><%= @game.summary %></h2>
-
-<h2>Reviews:</h2>
-<% @reviews.each do |review| %>
-
+  <% if @reviews %>
+  <h2>Reviews:</h2>
+    <% @reviews.each do |review| %>
+      <h4>
+        <% if review.user %>
+          <%= review.user.name %> gave this game <%= review.rating %> out of 5 stars
+        <% end %>
+        <br />
+        <% if review.comment %>
+          Comment: <%= review.comment %>
+        <% end %>
+      </h4>
+    <% end %>
+  <% end %>
   <p>
-    <%= review.rating %>
-    <%= review.comment %>
+    <%= link_to "Home", root_path %>
   </p>
-<% end %>
-<%= render 'reviews/form' %>
-<p>
-  <%= link_to "Home", root_path %>
-</p>
+</div>
