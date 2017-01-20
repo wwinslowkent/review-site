@@ -2,26 +2,33 @@
   <p>
     <%= form_tag(api_index_path, :method => "get", id: "search-form") do %>
        <%= text_field_tag :search, params[:search], placeholder: "Search IGDB Database" %>
-       <div class='text-center'><%= submit_tag "Search", :name => nil, id: 'black'%> </div>
+       <div class='text-center'><%= submit_tag "Search", :name => nil%> </div>
     <% end %>
   </p>
-
-  <% if @games == [] %>
-    <h4>There are no games containing the term <%= @search %>.</h4>
-  <% else %>
-    <% @games.each do |body|  %>
-      <p class='large-12 columns small-12 columns medium-12 columns'>
-        <div class='large-2 columns medium-2 columns small-2 columns'>
-          <% if body['cover'] %>
-              <%= image_tag (body['cover']['url']) %>
-            <% else %>
-              <p> </p>
-          <% end %>
-        </div>
-        <div class='large-6 columns small-6 columns medium-6 columns'>
-          <%= body["name"] %>
-        </div>
-      </p>
+  <% if @search %>
+    <% if @games == [] %>
+      <h4 class='text-center'>There are no games containing the term <%= @search %>.</h4>
+    <% else %>
+      <div class='text-center'>
+        <% @games.each do |body|  %>
+          <p class='large-12 columns small-12 columns medium-12 columns'>
+            <div class='large-2 columns medium-3 columns small-4 columns text-center'>
+              <% if body['cover'] %>
+                <%= image_tag (body['cover']['url']) %>
+              <% else %>
+                <p> </p>
+              <% end %>
+            </div>
+            <div id='big' class='large-10 columns small-8 columns medium-9 columns text-left'>
+              <%= body["name"] %>
+            </div>
+          </p>
+        <% end %>
+      </div>
     <% end %>
+    <div class='text-center large-12 columns small-12 columns medium-12 columns'>
+      <h3>Don't see the game you want?</h3>
+      <%= button_to "Request a Game", api_index_path, method: :get, id: 'igdb' %>
+    </div>
   <% end %>
 </div>
