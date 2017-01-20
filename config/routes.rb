@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   root to: 'homepage#index'
   resources :homepage
 
-  resources :games, only: [:index, :show]
+  resources :games, only: [:index, :show] do
+    resources :reviews
+  end
 
   resources :api, only: [:index]
+
 end
