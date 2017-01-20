@@ -7,22 +7,27 @@ class ReviewsController < ApplicationController
 
   def create
     @game = Game.find(params[:game_id])
-    @review = Review.new(review_params)
-    @review.user = current_user
+    @review = Review.new(params_strong)
     @review.game = @game
+    @reviews = @game.reviews
+    @review.user = current_user
 
     if @review.save
-      flash[:notice] = "Review saved successfully."
+      flash[:notice] = "Thank you for submitting your review"
       redirect_to game_path(@game)
     else
-      flash[:alert] = @review.errors.full_messages.to_sentence
-      redirect_to game_path(@game)
+      flash[:notice] = @review.errors.full_messages.to_sentence
+      render '/games/show'
     end
   end
 
   private
 
-  def review_params
-    params.require(:review).permit(:comment, :rating, :user)
+  def params_strong
+    params.require(:review).permit(
+      :rating,
+      :comment
+      )
   end
+
 end

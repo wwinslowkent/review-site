@@ -7,16 +7,8 @@
 </div>
 <div id='form'>
   <% if user_signed_in? %>
-    <p>
-      <%= form_for [@game, @review] do |f| %>
-        <%= f.label :rating, "Rating (Required):" %>
-        <%= f.text_field :rating %>
-        <%= f.label :comment, "Comment (Optional):" %>
-        <%= f.text_field :comment %>
-        <%= f.submit value='Post Review'%>
-      <% end %>
-    </p>
-    <% else %>
+    <%= render 'reviews/form' %>
+  <% else %>
     <%= button_to 'Sign In to Post a Review', new_user_session_path %>
   <% end %>
 
@@ -34,4 +26,7 @@
       </h4>
     <% end %>
   <% end %>
+  <p>
+    <%= link_to "Home", root_path %>
+  </p>
 </div>
