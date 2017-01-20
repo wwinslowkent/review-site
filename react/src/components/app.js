@@ -6,9 +6,27 @@ import Review from './review';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { upvoted: false, downvoted: false };
+    this.state = {
+      upvoted: false,
+      downvoted: false,
+      reviews: []
+     };
 
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidMount() {
+    fetch('/api/v1/games')
+      .then(response => {
+        if (response.ok) {
+          return response;
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        this.setState({ reviews: data.reviews });
+      });
   }
 
   handleClick(button, index) {
@@ -29,7 +47,13 @@ class App extends Component {
 
   }
 
-
+  render() {
+    return (
+      <Review
+        whatever={this.state.whatever}
+        />
+    );
+  }
 
 
 
