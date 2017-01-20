@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   def destroy
     if admin_signed_in?
-      Reviews.where(user_id: params[:id]).delete_all
+      Review.where(user_id: params[:id]).delete_all
       User.where(id: params[:id]).delete_all
       redirect_to admins_path
     else
