@@ -10,6 +10,11 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
   end
 
+  resources :reviews do
+    resources :votes
+  end
+
+
   resources :api, only: [:index]
 
 end

@@ -14,7 +14,10 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     @reviews = @game.reviews
     @review = Review.new
+    respond_to do |format|
+      format.html
+      format.json { render json: @reviews }
+      binding.pry
+    end
   end
-
-
 end
