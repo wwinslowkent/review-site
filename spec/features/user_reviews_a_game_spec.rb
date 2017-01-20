@@ -10,7 +10,7 @@ feature "User can post a review on a game in the database" do
     click_on "Search"
     click_on game.name
 
-    expect(page).to_not have_content("Post Review")
+    expect(page).to_not have_content("Submit Your Review")
   end
 
   scenario "User signs in to post a review" do
@@ -26,7 +26,7 @@ feature "User can post a review on a game in the database" do
     click_on "Search"
     click_on game.name
 
-    expect(page).to have_button("Post Review")
+    expect(page).to have_button("Submit your review")
   end
 
   scenario "Visitor sees all the reviews for a game" do
