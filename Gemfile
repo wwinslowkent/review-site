@@ -31,6 +31,8 @@ gem 'foundation-rails'
 gem 'devise'
 # Enables serving assets in production and logging aggregation
 gem 'rails_12factor', group: :production
+gem 'httpclient'
+gem 'json'
 
 
 
@@ -55,6 +57,7 @@ group :development do
 end
 group :test do
   gem 'coveralls', require: false
+  gem 'database_cleaner'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
