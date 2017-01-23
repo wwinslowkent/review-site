@@ -1,4 +1,11 @@
-<h2>User List</h2>
-<% @users.each do |user| %>
-  <%= user.name %><%= button_to "Delete User Account", user, method: :delete, data: { confirm: "You sure?" } %>
-<% end %>
+<div id='pad'>
+  <h2>User List</h2>
+  <% @users.each do |user| %>
+    <div class='small-1 columns'>
+      <h3><%= user.name %></h3>
+    </div>
+    <div class='small-11 columns'>
+      <%= button_to "Delete User Account", user, method: :delete, data: { confirm: "You sure?" } %>
+    </div>
+  <% end %>
+</div>
