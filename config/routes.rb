@@ -7,9 +7,14 @@ Rails.application.routes.draw do
   resources :homepage
 
   resources :games, only: [:index, :show] do
-    resources :reviews
+    resources :reviews, except: [:index, :show]
   end
 
   resources :api, only: [:index]
 
+  devise_for :admins
+  resources :admins, only: [:index]
+  match 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
+
+  resources :users
 end
