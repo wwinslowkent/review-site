@@ -6,7 +6,7 @@
       <strong><%= link_to 'Galaxy Gamers Association', root_path %></strong>
     </div>
 
-    <div class="title-bar-right">
+    <div class="title-bar-right" id='right'>
 
         <% if user_signed_in? %>
           Logged in as <strong><%= current_user.name %></strong>.

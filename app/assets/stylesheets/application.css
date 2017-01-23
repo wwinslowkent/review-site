@@ -152,5 +152,9 @@ input[type="button"], input[type="submit"] {
 }
 
 #nav {
-  font-size: 1vw;
+  font-size: 1.5vw;
+}
+
+#right {
+  height: 25px;
 }
