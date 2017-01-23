@@ -26,28 +26,31 @@
 }
 
 #core {
-  background: url(./orion.jpg) no-repeat center center fixed;
+  background: linear-gradient(rgba(0,0,0, .5), rgba(0,0,0,.5)), url(./orion.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   color: #ffffff;
-  padding-bottom: 1000px;
 }
 
 #homepage {
-  padding-top: 225px;
-  padding-bottom: 0px;
-  padding-left: 300px;
-  padding-right: 300px;
+  padding-top: 20%;
+  padding-bottom: 100%;
+  padding-left: 20%;
+  padding-right: 20%;
+  background: url(./orion.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+
 }
 
 #index {
-  padding-top: 200px;
-  padding-bottom: 250px;
-  padding-left: 200px;
-  padding-right: 200px;
+  padding-top: 20%;
+  padding-bottom: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
   text-align: center;
-  font-size: 50px;
   color: #ffffff;
 }
 
@@ -55,19 +58,8 @@
   color: #000000;
 }
 
-#games {
-  padding-top: 50px;
-  padding-bottom: 500px;
-  padding-left: 50px;
-  padding-right: 50px;
-}
-
 #flash {
   background: linear-gradient(rgba(198,58,57, .5), rgba(198,58,57, .5));
-}
-
-#space {
-
 }
 
 #pic {
@@ -79,7 +71,7 @@
 }
 
 #gameshow {
-  padding: 50px;
+  padding: 5%;
 }
 
 #ha {
@@ -102,20 +94,67 @@ input[type="button"], input[type="submit"] {
   font-family: Verdana;
   width: auto;
   height: auto;
-  font-size: 16px;
-  padding: 10px 40px;
+  font-size: 100%;
+  padding: 1% 4%;
   background-color: #FCFAF9;
 }
 
 #pad {
   padding-left: 20px;
   padding-right: 20px;
-}
-
-#igdb {
-
+  padding-bottom: 1500px;
 }
 
 #big {
   font-size: 2.5em;
+}
+
+#api {
+  padding-top: 20%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+#padding {
+  padding-bottom: 1000px;
+}
+
+#api2 {
+  padding-top: 10%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+#games {
+  font-size: 3vw;
+}
+
+#button {
+  border:1px solid #BFBFBF;
+  color: #8C8C8C;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  font-family: Verdana;
+  width: auto;
+  height: auto;
+  font-size: 16px;
+  padding: 10px 40px;
+  background-color: #FCFAF9;
+}
+
+#small {
+  font-size: 16px;
+}
+
+#game {
+  padding: 1%;
+}
+
+#nav {
+  font-size: 1.5vw;
+}
+
+#right {
+  height: 25px;
 }

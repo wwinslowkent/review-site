@@ -13,5 +13,6 @@ class ApiController < ApplicationController
         end
       end
     end
+    @game = Game.new
   end
 end
