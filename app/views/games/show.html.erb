@@ -2,16 +2,22 @@
   <img src="https://<%= @game.cover_url %>" class='small-2 columns'></img>
   <h1 class='small-10 columns'><%= @game.name %></h1>
 </div>
+<div class="user_id" id="<% if (current_user.nil?) %>
+                          <%= 0 %>
+                         <% else %>
+                          <%= current_user.id %>
+                        <% end %>" >
+</div>
+
 <div id = 'ha'>
   <p><%= @game.summary %></p>
 </div>
 <div id='form'>
   <% if user_signed_in? %>
-    <%= render 'reviews/form' %>
+    <div id="app"></div>
   <% else %>
     <%= button_to 'Sign In to Post a Review', new_user_session_path %>
   <% end %>
-
   <% if @reviews != [] %>
   <h2>Reviews:</h2>
     <% @reviews.each do |review| %>
@@ -31,6 +37,9 @@
       </h4>
     <% end %>
   <% end %>
+
+
+
   <br />
   <p>
     <%= link_to "Home", root_path %>
