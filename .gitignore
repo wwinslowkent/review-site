@@ -17,6 +17,9 @@
 .byebug_history
 
 /coverage
+/node_modules
+/app/assets/javascripts/bundle.js
+/react/coverage
 .env
 
 README.md
