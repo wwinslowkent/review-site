@@ -11,13 +11,15 @@ class App extends Component {
       rating: "",
       clicked: false,
       user: null,
-      commentUsers: []
+      commentUsers: [],
+      isAdmin: false
 
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleRatingChange = this.handleRatingChange.bind(this);
     this.handleCommentChange = this.handleCommentChange.bind(this);
     this.handleClicked = this.handleClicked.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleClicked(event) {
@@ -63,6 +65,20 @@ class App extends Component {
   );
   }
 
+  handleDelete(reviewId){
+    let fetchBody = { id: reviewId }
+    let newReviews = []
+    let url = window.location.href.split("/");
+    let numId = url[url.length - 1];
+    fetch(`/api/v1/games/${numId}/reviews/${reviewId}`,
+    { method: "DELETE",
+    body: JSON.stringify(fetchBody)
+  }).then(function(response){
+    newReviews = response.json()
+    return newReviews
+  }).then((response) => this.setState({ reviews: response }))
+  }
+
 
   componentDidMount(){
     let url = window.location.href.split("/");
@@ -76,7 +92,8 @@ class App extends Component {
       this.setState({
         reviews: data.reviews,
         user: data.user,
-        commentUsers: data.commentUsers
+        commentUsers: data.commentUsers,
+        isAdmin: data.isAdmin
       });
     });
   }
@@ -88,6 +105,8 @@ class App extends Component {
     let userId;
     let counter = -1;
     let reviewUsers = this.state.commentUsers;
+    let isAdmin = this.state.isAdmin;
+
     if (this.state.user !== null) {
       userId = this.state.user.id;
       userName = this.state.user.name;
@@ -97,6 +116,9 @@ class App extends Component {
       userName = "test";
     }
     let reviews = this.state.reviews.map(review => {
+      let handleDelete = () => {
+        this.handleDelete(review.id)
+      }
       counter++;
       if (counter >=  reviewUsers.length) {
         return(
@@ -106,6 +128,10 @@ class App extends Component {
           rating={review.rating}
           comment={review.comment}
           username={currentUser.name}
+          reviewUser={review.user_id}
+          isAdmin={isAdmin}
+          userId ={userId}
+          handleDelete={handleDelete}
           />
         );
       }
@@ -117,6 +143,10 @@ class App extends Component {
           rating={review.rating}
           comment={review.comment}
           username={reviewUsers[counter].name}
+          reviewUser={review.user_id}
+          isAdmin={isAdmin}
+          userId ={userId}
+          handleDelete={handleDelete}
           />
         );
       }
