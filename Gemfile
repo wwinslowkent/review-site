@@ -33,7 +33,9 @@ gem 'devise'
 gem 'rails_12factor', group: :production
 gem 'httpclient'
 gem 'json'
-
+gem 'simple_form'
+gem 'carrierwave', '~> 1.0'
+gem 'mini_magick'
 
 
 group :development, :test do
