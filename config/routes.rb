@@ -19,6 +19,7 @@ Rails.application.routes.draw do
         resources :reviews, only: [:index, :new, :create, :destroy]
       end
     end
+  end
 
 
   resources :api, only: [:index]
