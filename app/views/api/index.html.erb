@@ -1,34 +1,63 @@
-<div id='games'>
+<% if !@search %>
+  <div id='homepage'>
+<% elsif @games == [] %>
+  <div id = 'api'>
+<% else %>
+  <div id ='api2'>
+<% end %>
+
   <p>
-    <%= form_tag(api_index_path, :method => "get", id: "search-form") do %>
-       <%= text_field_tag :search, params[:search], placeholder: "Search IGDB Database" %>
-       <div class='text-center'><%= submit_tag "Search", :name => nil%> </div>
-    <% end %>
-  </p>
+   <%= form_tag(api_index_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search IGDB Database" %>
+      <div class='text-center'><%= submit_tag "Search", :name => nil%> </div>
+      <br />
+   <% end %>
+ </p>
+</div>
+
   <% if @search %>
     <% if @games == [] %>
-      <h4 class='text-center'>There are no games containing the term <%= @search %>.</h4>
+      <div id='noresults'>
+        <h4 class='text-center'>There are no games containing the term <%= @search %>.</h4>
+      </div>
     <% else %>
-      <div class='text-center'>
+
+      <div id='games' class='small-12 columns'>
         <% @games.each do |body|  %>
-          <p class='large-12 columns small-12 columns medium-12 columns'>
-            <div class='large-2 columns medium-3 columns small-4 columns text-center'>
+          <div class='small-12 columns' id='game'>
+            <div class='small-3 columns text-right'>
               <% if body['cover'] %>
+                <div class='' id=''>
                 <%= image_tag (body['cover']['url']) %>
+                </div>
               <% else %>
                 <p> </p>
               <% end %>
             </div>
-            <div id='big' class='large-10 columns small-8 columns medium-9 columns text-left'>
+
+            <div class='small-6 columns text-center' id='name'>
               <%= body["name"] %>
             </div>
-          </p>
+
+            <div class='small-3 columns'>
+              <%= form_for [@game] do |f| %>
+
+                <%= f.hidden_field :name, value: body['name'] %>
+                <%= f.hidden_field :summary, value: body['summary'] %>
+                <%= f.hidden_field :cover_url, value: body['cover']['url'] %>
+                <div id='small'><%= f.submit(value="Add Game") %></div>
+
+              <% end %>
+            </div>
+
+          </div>
         <% end %>
       </div>
     <% end %>
-    <div class='text-center large-12 columns small-12 columns medium-12 columns'>
+    
+    <div class='text-center'>
       <h3>Don't see the game you want?</h3>
-      <%= button_to "Request a Game", api_index_path, method: :get, id: 'igdb' %>
+      <%= button_to "Request a Game", new_gamerequest_path, method: :get %>
+      <br />
     </div>
   <% end %>
-</div>

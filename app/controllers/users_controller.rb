@@ -5,7 +5,7 @@ class UsersController < ApplicationController
       @users = User.all
     else
       flash[:alert] = 'UNAUTHORIZED'
-      redirect_to root_path
+      redirect_to new_admin_session_path
     end
   end
 
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       redirect_to admins_path
     else
       flash[:alert] = 'UNAUTHORIZED'
-      redirect_to root_path
+      redirect_to new_admin_session_path
     end
   end
 end

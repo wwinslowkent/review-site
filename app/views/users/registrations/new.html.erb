@@ -17,8 +17,8 @@
     <div class="field">
       <%= f.label :password %>
       <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
+      <div id='resize'>(<%= @minimum_password_length %> characters minimum)</div>
+      <% end %>
       <%= f.password_field :password, autocomplete: "off" %>
     </div>
 
@@ -31,6 +31,6 @@
       <%= f.submit "Sign up" %>
     </div>
   <% end %>
-
+  <br />
   <%= render "users/shared/links" %>
 </div>

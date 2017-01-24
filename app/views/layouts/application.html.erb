@@ -14,16 +14,22 @@
   </head>
 
   <body>
-    <div id='core'>
-      <div class='text-center small-12 columns' id='flash'>
-        <% if notice %>
+
+    <div id='core' class='small-12 columns'>
+      <% if notice %>
+        <div class='text-center small-12 columns' id='flash'>
           <div class="alert alert-success"><%= notice %></div>
-        <% end %>
-        <% if alert %>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div class='text-center small-12 columns' id='flash'>
           <div class="alert alert-danger"><%= alert %></div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
+
     <%= yield %>
+    
     </div>
   </body>
 </html>

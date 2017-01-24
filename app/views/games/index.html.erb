@@ -4,10 +4,10 @@
     <%= button_to "Add a Game from IGDB", api_index_path, method: :get %>
   </div>
 <% else %>
-  <div id='games'>
+  <div id='pad'>
     <% @games.each do |game| %>
       <p>
-        <div id='space' class='small-12 columns row'>
+        <div class='small-12 columns row'>
           <div class='small-2 columns' id='pic'>
             <img src="https://<%= game.cover_url %>"/>
           </div>
@@ -21,6 +21,7 @@
     <div class='text-center'>
       <h3>Don't see the game you want?</h3>
       <%= button_to "Add a Game from IGDB", api_index_path, method: :get, id: 'igdb' %>
+      <br />
     </div>
   </div>
 <% end %>

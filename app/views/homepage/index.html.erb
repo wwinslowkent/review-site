@@ -1,8 +1,13 @@
-<div id='homepage'>
+<% if notice || alert %>
+  <div id='homepageb'>
+<% else %>
+  <div id='homepage'>
+<% end %>
+
   <p>
     <%= form_tag(games_path, :method => "get", id: "search-form") do %>
        <%= text_field_tag :search, params[:search], placeholder: "Search Games" %>
-       <div class='text-center'><%= submit_tag "Search", :name => nil%> </div>
+       <div class='text-center'><%= submit_tag "Search", name: nil%> </div>
     <% end %>
   </p>
 </div>
