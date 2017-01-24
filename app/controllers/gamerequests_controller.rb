@@ -75,6 +75,7 @@ class GamerequestsController < ApplicationController
     if admin_signed_in?
       @gamerequest = Gamerequest.find(params[:id])
       @gamerequest.destroy
+      GamerequestMailer.delete_gamerequest(@gamerequest).deliver_now
       flash[:alert] = "You have deleted this request successfully"
       redirect_to gamerequests_path
     else
