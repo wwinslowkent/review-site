@@ -16,7 +16,6 @@ class Api::V1::ReviewsController < ApplicationController
     @game = Game.find(params[:game_id])
     #this is how you read fetch body data
     data = JSON.parse(request.body.read)
-
     @user = User.find(data["userId"])
     @review = Review.new(comment: data["comment"], rating: data["rating"])
     @review.user = @user
@@ -24,7 +23,7 @@ class Api::V1::ReviewsController < ApplicationController
 
 
     if @review.save!
-      @reviews = Review.all
+      @reviews = @game.reviews
       render json: @reviews
     else
       render json: {message: "Did not work"}, status: 404

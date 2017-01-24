@@ -10,7 +10,8 @@ class App extends Component {
       comment: "",
       rating: "",
       clicked: false,
-      userId: null
+      user: null,
+      commentUsers: []
 
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,60 +40,90 @@ class App extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    // window.location.href
-    let url = window.location.href.split("/")
-    console.log(url);
-    let numId = url[url.length - 1]
-    console.log(numId);
-    let fetchBody = { rating: this.state.rating,  comment: this.state.comment, userId: this.state.userId };
+    let url = window.location.href.split("/");
+    let numId = url[url.length - 1];
+    let fetchBody = { rating: this.state.rating,  comment: this.state.comment, userId: this.state.user.id };
     let newReviews = [];
+    let newUserArr = this.state.commentUsers;
+    newUserArr.push(this.state.user);
     fetch(`../api/v1/games/${numId}/reviews`,
       { method: "POST",
       body: JSON.stringify(fetchBody) })
       .then(function(response) {
         newReviews = response.json();
         return newReviews;
-      }).then((response) => this.setState({
+      }).then((response) =>
+      this.setState({
         reviews: response,
         rating: "",
         comment: "",
-        clicked: false
-      }));
-
+        clicked: false,
+        commentUsers: newUserArr
+      })
+  );
   }
 
 
   componentDidMount(){
-    let url = window.location.href.split("/")
-    let numId = url[url.length - 1]
-    let currentUserId = parseInt($('.user_id').first().attr("id"));
-    console.log(`userId: ${currentUserId}`);
+    let url = window.location.href.split("/");
+    let numId = url[url.length - 1];
     $.ajax({
+      credentials: 'same-origin',
       method: "GET",
       url: `../api/v1/games/${numId}.json`
     })
     .done(data => {
       this.setState({
-        reviews: data,
-        userId: currentUserId
+        reviews: data.reviews,
+        user: data.user,
+        commentUsers: data.commentUsers
       });
     });
   }
 
   render() {
     let clicked = this.state.clicked;
-    let userId = this.state.userId;
+    let currentUser = this.state.user;
+    let userName;
+    let userId;
+    let counter = -1;
+    let reviewUsers = this.state.commentUsers;
+    if (this.state.user !== null) {
+      userId = this.state.user.id;
+      userName = this.state.user.name;
+    }
+    else {
+      userId = 0;
+      userName = "test";
+    }
     let reviews = this.state.reviews.map(review => {
-      return(
-        <Review
-        key={review.id}
-        id={review.id}
-        rating={review.rating}
-        comment={review.comment}
-        />
-      );
+      counter++;
+      if (counter >=  reviewUsers.length) {
+        return(
+          <Review
+          key={review.id}
+          id={review.id}
+          rating={review.rating}
+          comment={review.comment}
+          username={currentUser.name}
+          />
+        );
+      }
+      else {
+        return(
+          <Review
+          key={review.id}
+          id={review.id}
+          rating={review.rating}
+          comment={review.comment}
+          username={reviewUsers[counter].name}
+          />
+        );
+      }
     });
+    if (this.state.user !== null) {
     return(
+
       <div>
         <Form
           handleSubmit={this.handleSubmit}
@@ -102,11 +133,22 @@ class App extends Component {
           clicked={clicked}
           userId={userId}
         />
-
         {reviews}
-      </div>
 
-    );
+        </div>
+        );
+      }
+      else {
+        return (
+        <div>
+          {reviews}
+          </div>
+        );
+      }
+
+
+
+
   }
 }
 
