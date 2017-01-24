@@ -29,7 +29,7 @@ class GamerequestsController < ApplicationController
 
   def create
     if user_signed_in?
-      @gamerequest = Gamerequest.create(gamerequest_params)
+      @gamerequest = Gamerequest.new(gamerequest_params)
       @gamerequest.user = current_user
       if @gamerequest.save
         flash[:notice] = 'Request Created Successfully. Please be patient while we process your request.'
@@ -75,6 +75,7 @@ class GamerequestsController < ApplicationController
     if admin_signed_in?
       @gamerequest = Gamerequest.find(params[:id])
       @gamerequest.destroy
+      GamerequestMailer.delete_gamerequest(@gamerequest).deliver_now
       flash[:alert] = "You have deleted this request successfully"
       redirect_to gamerequests_path
     else

@@ -1,5 +1,5 @@
 class Api::V1::ReviewsController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:create, :update]
+  skip_before_action :verify_authenticity_token
 
   def index
     @user = current_user
@@ -9,6 +9,16 @@ class Api::V1::ReviewsController < ApplicationController
   def new
     @game = Game.find(params[:id])
     @review = Review.new
+  end
+
+  def destroy
+    data = JSON.parse(request.body.read)
+    review = Review.find(data["id"])
+    @game = Game.find(params[:game_id])
+    if review.delete
+      @reviews = @game.reviews
+      render json: @reviews
+    end
   end
 
   def create
