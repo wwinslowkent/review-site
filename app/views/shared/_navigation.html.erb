@@ -1,4 +1,4 @@
-<div data-sticky-container>
+<div data-sticky-container id='nav'>
   <div class="title-bar large-12 columns small-12 columns medium-12 columns" id = 'title' data-sticky data-options="marginTop:0;" style="width:100%" data-top-anchor="1" >
 
     <div class="title-bar-left">
@@ -6,14 +6,15 @@
       <strong><%= link_to 'Galaxy Gamers Association', root_path %></strong>
     </div>
 
-    <div class="title-bar-right">
+    <div class="title-bar-right" id='right'>
 
         <% if user_signed_in? %>
           Logged in as <strong><%= current_user.name %></strong>.
           <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
           <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
         <% elsif admin_signed_in? %>
-          Logged in as Admin: <strong><%= current_admin.email %></strong>.
+          Logged in as Admin: <strong><%= current_admin.email %></strong>. |
+          <%= link_to "Dashboard", admins_path %> |
           <%= link_to "Logout", destroy_admin_session_path, method: :delete, :class => 'navbar-link'  %>
         <% else %>
           <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |

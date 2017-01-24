@@ -2,10 +2,12 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     reviews: 'api/v1/reviews'
+    index: '/users'
   }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'homepage#index'
   resources :homepage
+
 
   resources :games, only: [:index, :show] do
     resources :reviews, except: [:show]
@@ -17,7 +19,7 @@ Rails.application.routes.draw do
         resources :reviews, only: [:index, :new, :create, :destroy]
       end
     end
-  end
+
 
   resources :api, only: [:index]
 
