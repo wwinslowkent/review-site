@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   resources :homepage
 
 
-  resources :games, only: [:index, :show] do
-    resources :reviews, except: [:show]
+  resources :games do
+    resources :reviews, except: [:index, :show]
   end
 
   namespace :api do
