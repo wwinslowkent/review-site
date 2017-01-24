@@ -31,6 +31,6 @@ feature "add a game" do
     click_on "Add Game", match: :first
 
     expect(page).to have_content('Thank you for adding this game to our database!')
-    expect(page).to have_content('Super Mario World')
+    expect(page).to have_content('Super Mario Bros')
   end
 end
