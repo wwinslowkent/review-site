@@ -1,7 +1,7 @@
 <div id='pad'>
   <div class='small-12 columns' id='gameshow'>
-    <img src="https://<%= @game.cover_url %>" class='large-2 columns small-6 columns medium-4 columns'></img>
-    <h1 class='large-10 columns small-6 columns medium-8 columns'><%= @game.name %></h1>
+    <img src="https://<%= @game.cover_url %>" class='large-2 columns small-5 columns medium-3 columns'></img>
+    <h1 class='large-10 columns small-7 columns medium-9 columns' id='gameshow'><%= @game.name %></h1>
       <% if admin_signed_in? %>
         <%= button_to "Edit Game", edit_game_path, method: :get %>
       <% end %>

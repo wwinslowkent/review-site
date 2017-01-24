@@ -21,12 +21,12 @@ class GamesController < ApplicationController
       @game = Game.new
     else
       flash[:alert] = "Please sign in to add a game"
-      redirect_to api_index_path
+      redirect_to new_user_session_path
     end
   end
 
   def create
-    if user_signed_in?
+    if user_signed_in? || admin_signed_in?
       @game = Game.create(game_params)
 
       if @game.save
@@ -34,11 +34,11 @@ class GamesController < ApplicationController
         redirect_to game_path(@game)
       else
         flash[:notice] = @game.errors.full_messages.to_sentence
-        redirect_to :back
+        redirect_back(fallback_location: root_path)
       end
     else
       flash[:alert] = "Please sign in to add a game"
-      redirect_to :back
+      redirect_to new_user_session_path
     end
   end
 
@@ -47,7 +47,7 @@ class GamesController < ApplicationController
       @game = Game.find(params[:id])
     else
       flash[:alert] = "UNAUTHORIZED"
-      redirect_to :back
+      redirect_to new_admin_session_path
     end
   end
 
@@ -65,7 +65,7 @@ class GamesController < ApplicationController
       end
     else
       flash[:alert] = "UNAUTHORIZED"
-      redirect_to :back
+      redirect_to new_admin_session_path
     end
   end
 
@@ -78,7 +78,7 @@ class GamesController < ApplicationController
       redirect_to games_path
     else
       flash[:alert] = 'UNAUTHORIZED'
-      redirect_to :back
+      redirect_to new_admin_session_path
     end
   end
 

@@ -17,10 +17,8 @@
 
   <% if @search %>
     <% if @games == [] %>
-      <div id='index'>
+      <div id='noresults'>
         <h4 class='text-center'>There are no games containing the term <%= @search %>.</h4>
-        <h3>Don't see the game you want?</h3>
-        <%= button_to "Request a Game", api_index_path, method: :get %>
       </div>
     <% else %>
 
@@ -55,11 +53,11 @@
           </div>
         <% end %>
       </div>
-
-      <div class='text-center'>
-        <h3>Don't see the game you want?</h3>
-        <%= button_to "Request a Game", api_index_path, method: :get %>
-        <br />
-      </div>
     <% end %>
+    
+    <div class='text-center'>
+      <h3>Don't see the game you want?</h3>
+      <%= button_to "Request a Game", new_gamerequest_path, method: :get %>
+      <br />
+    </div>
   <% end %>

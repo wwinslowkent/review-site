@@ -1,0 +1,25 @@
+<div id='pad'>
+  <h1>Game Requests:</h1>
+
+  <% if @gamerequests == [] %>
+      <h3>There are no pending requests!</h3>
+  <% else %>
+    <% @gamerequests.each do |request| %>
+      <%= request.name %>
+      <%= request.summary %>
+      <%= image_tag request.cover_url %>
+      <%= request.user.name %>
+      <%= request.created_at %>
+      <%= button_to "Edit", edit_gamerequest_path(request), method: :get %>
+      <%= button_to 'Delete Request', gamerequest_path(request), method: :delete, data: { confirm: "Are you sure? This action cannot be undone." }%>
+      <%= form_for [@game] do |f| %>
+
+        <%= f.hidden_field :name, value: request.name %>
+        <%= f.hidden_field :summary, value: request.summary %>
+        <%= f.hidden_field :cover_url, value: request.cover_url %>
+        <div id='small'><%= f.submit(value="Approve Game") %></div>
+
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

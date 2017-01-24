@@ -4,7 +4,7 @@
     <%= button_to "Add a Game from IGDB", api_index_path, method: :get %>
   </div>
 <% else %>
-  <div>
+  <div id='pad'>
     <% @games.each do |game| %>
       <p>
         <div class='small-12 columns row'>
@@ -21,6 +21,7 @@
     <div class='text-center'>
       <h3>Don't see the game you want?</h3>
       <%= button_to "Add a Game from IGDB", api_index_path, method: :get, id: 'igdb' %>
+      <br />
     </div>
   </div>
 <% end %>
