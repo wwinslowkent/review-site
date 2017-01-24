@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   match 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
 
   resources :users
+
+  resources :gamerequests
 end
