@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
 
   def index
-    @games = Game.all
+    @games = Game.all.order(name: :asc)
     if params[:search]
       @search = params[:search]
       @games = Game.where('name  ~* ?', "#{@search}").order(name: :asc)
@@ -29,7 +29,12 @@ class GamesController < ApplicationController
     if user_signed_in? || admin_signed_in?
       @game = Game.create(game_params)
 
-      if @game.save
+      if @game.save && user_signed_in?
+        flash[:notice] = "Thank you for adding this game to our database!"
+        redirect_to game_path(@game)
+      elsif @game.save && admin_signed_in?
+        @gamerequest = Gamerequest.where(name: @game.name).first.destroy
+        GameMailer.new_game(@gamerequest).deliver_now
         flash[:notice] = "Thank you for adding this game to our database!"
         redirect_to game_path(@game)
       else
