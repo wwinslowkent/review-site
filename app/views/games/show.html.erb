@@ -2,30 +2,45 @@
   <img src="https://<%= @game.cover_url %>" class='small-2 columns'></img>
   <h1 class='small-10 columns'><%= @game.name %></h1>
 </div>
+<div class="user_id" id="<% if (current_user.nil?) %>
+                          <%= 0 %>
+                         <% else %>
+                          <%= current_user.id %>
+                        <% end %>" >
+</div>
+
 <div id = 'ha'>
   <p><%= @game.summary %></p>
 </div>
 <div id='form'>
   <% if user_signed_in? %>
-    <%= render 'reviews/form' %>
+    <div id="app"></div>
   <% else %>
     <%= button_to 'Sign In to Post a Review', new_user_session_path %>
   <% end %>
-
-  <% if @reviews %>
+  <% if @reviews != [] %>
   <h2>Reviews:</h2>
     <% @reviews.each do |review| %>
       <h4>
         <% if review.user %>
-          <%= review.user.name %> gave this game <%= review.rating %> out of 5 stars
-        <% end %>
+          <%= review.user.name %>
+        <% else %>
+          [ <i>User Deleted</i> ]
+        <% end %>gave this game <%= review.rating %> out of 5 stars
         <br />
         <% if review.comment %>
           Comment: <%= review.comment %>
         <% end %>
+        <% if admin_signed_in? || (current_user && (current_user.id == review.user.id))%>
+          <%= button_to 'Delete Review', polymorphic_url([@game, review]), method: :delete %>
+        <% end %>
       </h4>
     <% end %>
   <% end %>
+
+
+
+  <br />
   <p>
     <%= link_to "Home", root_path %>
   </p>

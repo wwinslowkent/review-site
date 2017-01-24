@@ -21,6 +21,23 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+  end
+
+  def destroy
+    @review = Review.find(params[:id])
+    if (current_user == @review.user) || admin_signed_in?
+      @review.destroy
+      redirect_to game_path(params[:game_id])
+    else
+      flash[:alert] = "UNAUTHORIZED"
+      redirect_to review_path(@review)
+    end
+  end
+
   private
 
   def params_strong
