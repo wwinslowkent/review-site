@@ -33,8 +33,7 @@ gem 'devise'
 gem 'rails_12factor', group: :production
 gem 'httpclient'
 gem 'json'
-
-
+gem 'mailcatcher'
 
 group :development, :test do
   gem 'pry-rails'
