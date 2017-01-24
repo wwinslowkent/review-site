@@ -16,46 +16,65 @@
 
  */
 
- .top-bar {
-  margin-bottom: 30px;
-}
-
 #logo {
-  width: 25px;
-  height: 25px;
+  width: 2vw;
+  height: 2vw;
 }
 
 #core {
-  background: linear-gradient(rgba(0,0,0, .5), rgba(0,0,0,.5)), url(./orion.jpg) no-repeat center center fixed;
+  min-height: 100%;
+  min-width: 100%;
+  background: linear-gradient(rgba(0,0,0, .65), rgba(0,0,0,.65)), url(./orion.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
+  background-size: cover;
   color: #ffffff;
 }
 
 #homepage {
-  padding-top: 20%;
-  padding-bottom: 100%;
+  padding-top: 15%;
   padding-left: 20%;
   padding-right: 20%;
+  padding-bottom: 100%;
+  position: fixed;
+  height: 100%;
+  width: 100%;
   background: url(./orion.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
+  background-size: cover;
+}
 
+#homepageb {
+  padding-top: 15%;
+  padding-left: 20%;
+  padding-right: 20%;
+  padding-bottom: 100%;
+  height: 100%;
+  width: 100%;
+  background: url(./orion.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 #index {
   padding-top: 20%;
-  padding-bottom: 100%;
   padding-left: 10%;
   padding-right: 10%;
   text-align: center;
   color: #ffffff;
 }
 
-#black {
-  color: #000000;
+#noresults {
+  padding-top: 0%;
+  padding-left: 10%;
+  padding-right: 10%;
+  text-align: center;
+  color: #ffffff;
 }
 
 #flash {
@@ -63,25 +82,28 @@
 }
 
 #pic {
-  padding: 10px;
+  padding: 1%;
 }
 
 #title {
-  background-color: #2e344b;
+  background-color: #3d4460;
+  padding: .75%;
+  font-size: 1.8vw;
 }
 
 #gameshow {
   padding: 5%;
+  padding-bottom: 1%;
 }
 
 #ha {
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 #form {
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 5%;
+  padding-right: 5%;
   color: #ffffff;
 }
 
@@ -102,21 +124,12 @@ input[type="button"], input[type="submit"] {
 #pad {
   padding-left: 20px;
   padding-right: 20px;
-  padding-bottom: 1500px;
-}
-
-#big {
-  font-size: 2.5em;
 }
 
 #api {
-  padding-top: 20%;
+  padding-top: 10%;
   padding-left: 10%;
   padding-right: 10%;
-}
-
-#padding {
-  padding-bottom: 1000px;
 }
 
 #api2 {
@@ -151,10 +164,10 @@ input[type="button"], input[type="submit"] {
   padding: 1%;
 }
 
-#nav {
-  font-size: 1.5vw;
+#resize {
+  font-size: 14px;
 }
 
-#right {
-  height: 25px;
+.column, .columns {
+  padding: 0;
 }
