@@ -21,8 +21,20 @@ class Api::V1::ReviewsController < ApplicationController
     end
   end
 
-  def create
+  def updated
+    data = JSON.parse(request.body.read)
+    review = Review.find(data["id"])
+    @game = Game.find(params[:id])
+    if data["type"] == "edit"
+      review.comment = data["comment"]
+      review.rating = data["rating"]
+      review.save
+      @reviews = @game.reviews
+      render json: @reviews
+    end
+  end
 
+  def create
     @game = Game.find(params[:game_id])
     #this is how you read fetch body data
     data = JSON.parse(request.body.read)

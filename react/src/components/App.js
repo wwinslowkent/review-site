@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Review from './Review';
 import Form from './Form';
 
+
 class App extends Component {
   constructor(props){
     super(props);
@@ -12,7 +13,8 @@ class App extends Component {
       clicked: false,
       user: null,
       commentUsers: [],
-      isAdmin: false
+      isAdmin: false,
+      revealedKey: null
 
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,6 +22,15 @@ class App extends Component {
     this.handleCommentChange = this.handleCommentChange.bind(this);
     this.handleClicked = this.handleClicked.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleEditClicked = this.handleEditClicked.bind(this);
+  }
+
+  handleEditClicked(reviewId) {
+    if (reviewId != this.state.revealedKey) {
+      this.setState({revealedKey: reviewId});
+    } else {
+      this.setState({revealedKey: null});
+    }
   }
 
   handleClicked(event) {
@@ -38,6 +49,28 @@ class App extends Component {
   handleCommentChange(event) {
     let newComment = event.target.value;
     this.setState({ comment: newComment });
+  }
+
+  handleEdit(reviewId) {
+    event.preventDefault();
+    let url = window.location.href.split("/");
+    let numId = url[url.length - 1];
+    let fetchBody = { rating: this.state.rating,  comment: this.state.comment};
+    let newReviews = [];
+    fetch(`../api/v1/games/${numId}/reviews/${reviewId}`,
+      { method: "PATCH",
+      body: JSON.stringify(fetchBody) })
+      .then(function(response) {
+        newReviews = response.json();
+        return newReviews;
+      }).then((response) =>
+      this.setState({
+        reviews: response,
+        rating: "",
+        comment: "",
+        editReview: false
+      })
+  );
   }
 
   handleSubmit(event) {
@@ -62,23 +95,23 @@ class App extends Component {
         clicked: false,
         commentUsers: newUserArr
       })
-  );
+    );
   }
 
   handleDelete(reviewId){
-    let fetchBody = { id: reviewId }
-    let newReviews = []
+    let fetchBody = { id: reviewId };
+    let newReviews = [];
     let url = window.location.href.split("/");
     let numId = url[url.length - 1];
     fetch(`/api/v1/games/${numId}/reviews/${reviewId}`,
     { method: "DELETE",
     body: JSON.stringify(fetchBody)
   }).then(function(response){
-    newReviews = response.json()
-    return newReviews
-  }).then((response) => this.setState({ reviews: response }))
+    newReviews = response.json();
+    return newReviews;
+  })
+  .then((response) => this.setState({ reviews: response }));
   }
-
 
   componentDidMount(){
     let url = window.location.href.split("/");
@@ -106,6 +139,8 @@ class App extends Component {
     let counter = -1;
     let reviewUsers = this.state.commentUsers;
     let isAdmin = this.state.isAdmin;
+    let revealedKey = this.state.revealedKey;
+    let revealedEdit;
 
     if (this.state.user !== null) {
       userId = this.state.user.id;
@@ -116,9 +151,26 @@ class App extends Component {
       userName = "test";
     }
     let reviews = this.state.reviews.map(review => {
-      let handleDelete = () => {
-        this.handleDelete(review.id)
+      if (review.id == revealedKey) {
+        revealedEdit = true;
       }
+      else {
+        revealedEdit = false;
+      }
+      let handleDelete = () => {
+        this.handleDelete(review.id);
+      };
+
+      let handleEdit = () => {
+        this.handleEdit(review.id);
+      };
+      let handleRatingChange = () => {
+        this.handleRatingChange(review.id);
+      };
+      let handleCommentChange = () => {
+        this.handleCommentChange(review.id);
+      };
+
       counter++;
       if (counter >=  reviewUsers.length) {
         return(
@@ -132,6 +184,12 @@ class App extends Component {
           isAdmin={isAdmin}
           userId ={userId}
           handleDelete={handleDelete}
+          handleEdit={handleEdit}
+          handleRatingChange={handleRatingChange}
+          handleCommentChange={handleCommentChange}
+          onClickFunction={this.handleEditClicked}
+          revealed={revealedEdit}
+
           />
         );
       }
