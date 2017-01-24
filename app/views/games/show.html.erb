@@ -1,45 +1,32 @@
-<div id='pad'>
-  <div class='small-12 columns' id='gameshow'>
-    <img src="https://<%= @game.cover_url %>" class='large-2 columns small-5 columns medium-3 columns'></img>
-    <h1 class='large-10 columns small-7 columns medium-9 columns' id='gameshow'><%= @game.name %></h1>
-      <% if admin_signed_in? %>
+
+
+<div class='small-12 columns' id='gameshow'>
+  <img src="https://<%= @game.cover_url %>" class='small-2 columns'></img>
+  <h1 class='small-10 columns'><%= @game.name %></h1>
+  <% if admin_signed_in? %>
         <%= button_to "Edit Game", edit_game_path, method: :get %>
       <% end %>
-  </div>
+</div>
 
-  <div id = 'ha'>
-    <p><%= @game.summary %></p>
-  </div>
+<div id = 'ha'>
+  <p><%= @game.summary %></p>
+</div>
+<div id='form'>
 
-  <div id='form'>
-    <% if user_signed_in? %>
-      <%= render 'reviews/form' %>
-    <% else %>
-      <%= button_to 'Sign In to Post a Review', new_user_session_path %>
-    <% end %>
+  <% if user_signed_in? %>
 
-    <% if @reviews != [] %>
-    <h2>Reviews:</h2>
-      <% @reviews.each do |review| %>
-        <h4>
-          <% if review.user %>
-            <%= review.user.name %>
-          <% else %>
-            [ <i>User Deleted</i> ]
-          <% end %>gave this game <%= review.rating %> out of 5 stars
-          <br />
-          <% if review.comment %>
-            Comment: <%= review.comment %>
-          <% end %>
-          <% if admin_signed_in? || (current_user && (current_user.id == review.user.id))%>
-            <%= button_to 'Delete Review', polymorphic_url([@game, review]), method: :delete %>
-          <% end %>
-        </h4>
-      <% end %>
-    <% end %>
-    <br />
-    <p>
-      <%= link_to "Home", root_path %>
-    </p>
-  </div>
+  <% else %>
+    <%= button_to 'Sign In to Post a Review', new_user_session_path %>
+  <% end %>
+  <div id="app"></div>
+
+
+
+
+  <br />
+  <p>
+    <%= link_to "Home", root_path %>
+  </p>
+
+
 </div>
