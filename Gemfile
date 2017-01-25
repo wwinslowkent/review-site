@@ -36,7 +36,7 @@ gem 'json'
 gem 'carrierwave', '~> 1.0'
 gem 'image_magick'
 gem 'mini_magick'
-gem 'mailcatcher'
+
 gem 'dotenv-rails'
 
 group :development, :test do
@@ -51,6 +51,7 @@ group :development, :test do
 end
 
 group :development do
+  
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'
