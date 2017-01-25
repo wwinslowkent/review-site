@@ -23,7 +23,40 @@ class App extends Component {
     this.handleClicked = this.handleClicked.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEditClicked = this.handleEditClicked.bind(this);
+    this.parseTime = this.parseTime.bind(this);
   }
+
+  parseTime(time) {
+
+    let firstSplit = time.split("-");
+    let year = firstSplit[0];
+    let month = firstSplit[1];
+    let rest = firstSplit[2].split("T");
+    let day = rest[0];
+    let hms = rest[1].split(":");
+    let hour = hms[0];
+    let minute = hms[1];
+
+    if (hour < 5) {
+      hour = hour + 19;
+    }
+    else {
+      hour = hour - 5;
+    }
+    let ampm = "";
+    if (hour > 12) {
+      hour = hour - 12;
+      ampm = "PM";
+    }
+    else {
+      ampm = "AM";
+    }
+    let returnString = `${hour}:${minute}${ampm}, ${month}/${day}/${year}`;
+    console.log(returnString);
+    return returnString;
+
+  }
+
 
   handleEditClicked(reviewId) {
     if (reviewId != this.state.revealedKey) {
@@ -142,6 +175,7 @@ class App extends Component {
     let revealedKey = this.state.revealedKey;
     let revealedEdit;
 
+
     if (this.state.user !== null) {
       userId = this.state.user.id;
       userName = this.state.user.name;
@@ -151,6 +185,7 @@ class App extends Component {
       userName = "test";
     }
     let reviews = this.state.reviews.map(review => {
+      let createdAt = this.parseTime(review.created_at);
       if (review.id == revealedKey) {
         revealedEdit = true;
       }
@@ -164,7 +199,6 @@ class App extends Component {
       let handleEdit = () => {
         this.handleEdit(review.id);
       };
-
       counter++;
       if (counter >=  reviewUsers.length) {
         return(
@@ -183,6 +217,7 @@ class App extends Component {
           handleCommentChange={this.handleCommentChange}
           onClickFunction={this.handleEditClicked}
           revealed={revealedEdit}
+          createdAt={createdAt}
           />
         );
       }
@@ -203,6 +238,7 @@ class App extends Component {
           handleCommentChange={this.handleCommentChange}
           onClickFunction={this.handleEditClicked}
           revealed={revealedEdit}
+          createdAt={createdAt}
           />
         );
       }

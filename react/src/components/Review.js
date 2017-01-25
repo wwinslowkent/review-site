@@ -2,7 +2,6 @@ import React from 'react';
 
 const Review = props => {
 
-
   let buttonClick = () => props.onClickFunction(props.id);
 
   if(props.userId === props.reviewUser) {
@@ -10,7 +9,8 @@ const Review = props => {
       return(
         <div>
         {props.username}: Gave this game {props.rating} out of 5 stars<br/>
-        Comment: {props.comment}
+        Comment: {props.comment}<br/>
+        <h9>Posted at {props.createdAt}</h9>
         <div className="col s2 offset-s5 center-align">
           <input id="delete" className="btn" type="submit" value="Delete" name="Delete" onClick={buttonClick}/>
         </div>
@@ -38,7 +38,8 @@ const Review = props => {
       return(
         <div>
         {props.username}: Gave this game {props.rating} out of 5 stars<br/>
-        Comment: {props.comment}
+        Comment: {props.comment}<br/>
+        <h9>Posted at {props.createdAt}</h9>
         <div className="col s2 offset-s5 center-align">
           <input id="delete" className="btn" type="submit" value="Delete" name="Delete" onClick={props.handleDelete}/>
         </div>
@@ -54,7 +55,8 @@ const Review = props => {
     return(
       <div>
         {props.username}: Gave this game {props.rating} out of 5 stars<br/>
-        Comment: {props.comment}
+        Comment: {props.comment}<br/>
+        <h9>Posted at {props.createdAt}</h9>
         <div className="col s2 offset-s5 center-align">
           <input id="delete" className="btn" type="submit" value="Delete" name="Delete" onClick={props.handleDelete}/>
         </div>
@@ -68,6 +70,7 @@ const Review = props => {
       <div>
         {props.username}: Gave this game {props.rating} out of 5 stars<br/>
         Comment: {props.comment}
+        <h9>Posted at {props.createdAt}</h9>
 
         <hr/>
       </div>
