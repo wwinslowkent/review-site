@@ -1,5 +1,5 @@
 class GamerequestMailer < ApplicationMailer
-  default from: 'lagalaxygamers@gmail.com'
+  default from: 'lagalaxygamereviews@gmail.com'
   
   def delete_gamerequest(gamerequest)
     @gamerequest = gamerequest

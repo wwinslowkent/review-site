@@ -36,6 +36,7 @@ gem 'json'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
 gem 'mailcatcher'
+gem 'dotenv-rails'
 
 group :development, :test do
   gem 'pry-rails'
