@@ -21,8 +21,36 @@ class Api::V1::ReviewsController < ApplicationController
     end
   end
 
-  def create
+  def update
+    #data is the fetch request
+    data = JSON.parse(request.body.read)
+    props = {}
 
+    review = Review.find(data["id"])
+    @game = review.game
+    if (data["type"] == "update")
+      props["comment"] = data["comment"]
+      props["rating"] = data["rating"]
+      props["id"] = data["id"]
+      review.rating = data["rating"]
+      review.comment = data["comment"]
+      review.save
+      @reviews = @game.reviews
+    end
+    if (data["type"] == "upvote")
+      review.up_votes += 1
+      review.save
+      @reviews = @game.reviews
+    end
+    if (data["type"] == "downvote")
+      review.down_votes += 1
+      review.save
+      @reviews = @game.reviews
+    end
+    render json: @reviews
+  end
+
+  def create
     @game = Game.find(params[:game_id])
     #this is how you read fetch body data
     data = JSON.parse(request.body.read)
