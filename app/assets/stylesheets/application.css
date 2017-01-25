@@ -171,3 +171,8 @@ input[type="button"], input[type="submit"] {
 .column, .columns {
   padding: 0;
 }
+
+#profile{
+  height: 2vw;
+  width: 2vw;
+}

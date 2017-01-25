@@ -26,14 +26,18 @@ gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # foundation Formatting
-gem 'foundation-rails'
+gem 'foundation-rails', "6.2.4.0"
 # devise for making user accounts
 gem 'devise'
 # Enables serving assets in production and logging aggregation
 gem 'rails_12factor', group: :production
 gem 'httpclient'
 gem 'json'
-gem 'mailcatcher'
+gem 'carrierwave', '~> 1.0'
+gem 'image_magick'
+gem 'mini_magick'
+
+gem 'dotenv-rails'
 
 group :development, :test do
   gem 'pry-rails'
@@ -47,6 +51,7 @@ group :development, :test do
 end
 
 group :development do
+  
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'
