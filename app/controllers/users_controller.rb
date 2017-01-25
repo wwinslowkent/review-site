@@ -11,6 +11,8 @@ class UsersController < ApplicationController
 
   def destroy
     if admin_signed_in?
+      @user = User.find(params[:id])
+      GameMailer.delete_user(@user).deliver_now
       Review.where(user_id: params[:id]).delete_all
       User.where(id: params[:id]).delete_all
       redirect_to users_path
