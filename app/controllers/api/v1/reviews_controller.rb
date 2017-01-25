@@ -21,17 +21,14 @@ class Api::V1::ReviewsController < ApplicationController
     end
   end
 
-  def updated
+  def update
     data = JSON.parse(request.body.read)
     review = Review.find(data["id"])
-    @game = Game.find(params[:id])
-    if data["type"] == "edit"
-      review.comment = data["comment"]
-      review.rating = data["rating"]
-      review.save
-      @reviews = @game.reviews
-      render json: @reviews
-    end
+    @game = review.game
+    review.update!(data)
+    @reviews = @game.reviews
+    redirect_to game_path
+    render json: @reviews
   end
 
   def create

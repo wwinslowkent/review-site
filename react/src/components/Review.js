@@ -2,6 +2,7 @@ import React from 'react';
 
 const Review = props => {
 
+
   let buttonClick = () => props.onClickFunction(props.id);
 
   if(props.userId === props.reviewUser) {
@@ -15,17 +16,17 @@ const Review = props => {
         </div>
 
         <div className="row search">
-            <input id="edit_review" type='submit' value="Actually, Nevermind" className="btn" onClick={props.handleEditClick} />
+            <input id="edit_review" type='submit' value="Actually, Nevermind" className="btn" onClick={buttonClick} />
             <form>
               <div className="input-field col s3">
-                <input type="text" name="rating" placeholder="Enter rating here..." onChange={props.handleRatingChange}/>
+                <input type="text" name="rating" onChange={props.handleRatingChange}/>
               </div>
               <div className="input-field col s3">
-                <input type="text" name="comment" placeholder="Enter comment here..." onChange={props.handleCommentChange}/>
+                <input type="text" name="comment" onChange={props.handleCommentChange}/>
               </div>
               <div className="row">
                 <div className="col s2 offset-s5 center-align">
-                  <input id="add_review" className="btn" type="submit" value="Add Review" name="Submit" onClick={props.handleSubmit}/>
+                  <input id="add_review" className="btn" type="submit" value="Change Review" name="Submit" onClick={props.handleEdit}/>
                 </div>
               </div>
             </form>

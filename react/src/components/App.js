@@ -55,7 +55,7 @@ class App extends Component {
     event.preventDefault();
     let url = window.location.href.split("/");
     let numId = url[url.length - 1];
-    let fetchBody = { rating: this.state.rating,  comment: this.state.comment};
+    let fetchBody = { rating: this.state.rating,  comment: this.state.comment, id: reviewId};
     let newReviews = [];
     fetch(`../api/v1/games/${numId}/reviews/${reviewId}`,
       { method: "PATCH",
@@ -164,12 +164,6 @@ class App extends Component {
       let handleEdit = () => {
         this.handleEdit(review.id);
       };
-      let handleRatingChange = () => {
-        this.handleRatingChange(review.id);
-      };
-      let handleCommentChange = () => {
-        this.handleCommentChange(review.id);
-      };
 
       counter++;
       if (counter >=  reviewUsers.length) {
@@ -185,11 +179,10 @@ class App extends Component {
           userId ={userId}
           handleDelete={handleDelete}
           handleEdit={handleEdit}
-          handleRatingChange={handleRatingChange}
-          handleCommentChange={handleCommentChange}
+          handleRatingChange={this.handleRatingChange}
+          handleCommentChange={this.handleCommentChange}
           onClickFunction={this.handleEditClicked}
           revealed={revealedEdit}
-
           />
         );
       }
@@ -205,6 +198,11 @@ class App extends Component {
           isAdmin={isAdmin}
           userId ={userId}
           handleDelete={handleDelete}
+          handleEdit={handleEdit}
+          handleRatingChange={this.handleRatingChange}
+          handleCommentChange={this.handleCommentChange}
+          onClickFunction={this.handleEditClicked}
+          revealed={revealedEdit}
           />
         );
       }
