@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     if admin_signed_in?
       Review.where(user_id: params[:id]).delete_all
       User.where(id: params[:id]).delete_all
-      redirect_to admins_path
+      redirect_to users_path
     else
       flash[:alert] = 'UNAUTHORIZED'
       redirect_to new_admin_session_path
