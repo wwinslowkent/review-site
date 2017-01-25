@@ -24,6 +24,8 @@ class App extends Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEditClicked = this.handleEditClicked.bind(this);
     this.parseTime = this.parseTime.bind(this);
+    this.handleUpVote = this.handleUpVote.bind(this);
+    this.handleDownVote = this.handleDownVote.bind(this);
   }
 
   parseTime(time) {
@@ -52,7 +54,6 @@ class App extends Component {
       ampm = "AM";
     }
     let returnString = `${hour}:${minute}${ampm}, ${month}/${day}/${year}`;
-    console.log(returnString);
     return returnString;
 
   }
@@ -85,12 +86,12 @@ class App extends Component {
   }
 
   handleEdit(reviewId) {
+    let pageId = parseInt(document.getElementById('app').dataset.id);
     event.preventDefault();
-    let url = window.location.href.split("/");
-    let numId = url[url.length - 1];
-    let fetchBody = { rating: this.state.rating,  comment: this.state.comment, id: reviewId};
+
+    let fetchBody = { rating: this.state.rating,  comment: this.state.comment, id: reviewId, type: "update" };
     let newReviews = [];
-    fetch(`../api/v1/games/${numId}/reviews/${reviewId}`,
+    fetch(`../api/v1/games/${pageId}/reviews/${reviewId}`,
       { method: "PATCH",
       body: JSON.stringify(fetchBody) })
       .then(function(response) {
@@ -103,18 +104,60 @@ class App extends Component {
         comment: "",
         editReview: false
       })
-  );
+    );
+  }
+
+  handleUpVote(reviewId) {
+    let pageId = parseInt(document.getElementById('app').dataset.id);
+    event.preventDefault();
+    let fetchBody = { id: reviewId, type: "upvote" };
+    let newReviews = [];
+    fetch(`../api/v1/games/${pageId}/reviews/${reviewId}`,
+      { method: "PATCH",
+      body: JSON.stringify(fetchBody) })
+      .then(function(response) {
+        newReviews = response.json();
+        return newReviews;
+      }).then((response) =>
+      this.setState({
+        reviews: response,
+        rating: "",
+        comment: "",
+        editReview: false
+      })
+    );
+  }
+
+  handleDownVote(reviewId) {
+    let pageId = parseInt(document.getElementById('app').dataset.id);
+    event.preventDefault();
+    let fetchBody = { id: reviewId, type: "downvote" };
+    let newReviews = [];
+    fetch(`../api/v1/games/${pageId}/reviews/${reviewId}`,
+      { method: "PATCH",
+      body: JSON.stringify(fetchBody) })
+      .then(function(response) {
+
+        newReviews = response.json();
+        return newReviews;
+      }).then((response) =>
+      this.setState({
+        reviews: response,
+        rating: "",
+        comment: "",
+        editReview: false
+      })
+    );
   }
 
   handleSubmit(event) {
+    let pageId = parseInt(document.getElementById('app').dataset.id);
     event.preventDefault();
-    let url = window.location.href.split("/");
-    let numId = url[url.length - 1];
     let fetchBody = { rating: this.state.rating,  comment: this.state.comment, userId: this.state.user.id };
     let newReviews = [];
     let newUserArr = this.state.commentUsers;
     newUserArr.push(this.state.user);
-    fetch(`../api/v1/games/${numId}/reviews`,
+    fetch(`../api/v1/games/${pageId}/reviews`,
       { method: "POST",
       body: JSON.stringify(fetchBody) })
       .then(function(response) {
@@ -134,9 +177,8 @@ class App extends Component {
   handleDelete(reviewId){
     let fetchBody = { id: reviewId };
     let newReviews = [];
-    let url = window.location.href.split("/");
-    let numId = url[url.length - 1];
-    fetch(`/api/v1/games/${numId}/reviews/${reviewId}`,
+    let pageId = parseInt(document.getElementById('app').dataset.id);
+    fetch(`/api/v1/games/${pageId}/reviews/${reviewId}`,
     { method: "DELETE",
     body: JSON.stringify(fetchBody)
   }).then(function(response){
@@ -147,12 +189,11 @@ class App extends Component {
   }
 
   componentDidMount(){
-    let url = window.location.href.split("/");
-    let numId = url[url.length - 1];
+    let pageId = parseInt(document.getElementById('app').dataset.id);
     $.ajax({
       credentials: 'same-origin',
       method: "GET",
-      url: `../api/v1/games/${numId}.json`
+      url: `../api/v1/games/${pageId}.json`
     })
     .done(data => {
       this.setState({
@@ -192,6 +233,14 @@ class App extends Component {
       else {
         revealedEdit = false;
       }
+      let handleUpVote = () => {
+        this.handleUpVote(review.id);
+      };
+
+      let handleDownVote = () => {
+        this.handleDownVote(review.id);
+      };
+
       let handleDelete = () => {
         this.handleDelete(review.id);
       };
@@ -200,35 +249,21 @@ class App extends Component {
         this.handleEdit(review.id);
       };
       counter++;
+      let reviewUserHolder;
+
       if (counter >=  reviewUsers.length) {
-        return(
-          <Review
-          key={review.id}
-          id={review.id}
-          rating={review.rating}
-          comment={review.comment}
-          username={currentUser.name}
-          reviewUser={review.user_id}
-          isAdmin={isAdmin}
-          userId ={userId}
-          handleDelete={handleDelete}
-          handleEdit={handleEdit}
-          handleRatingChange={this.handleRatingChange}
-          handleCommentChange={this.handleCommentChange}
-          onClickFunction={this.handleEditClicked}
-          revealed={revealedEdit}
-          createdAt={createdAt}
-          />
-        );
+        reviewUserHolder = review.user_id;
       }
       else {
+        reviewUserHolder = reviewUsers[counter].name;
+      }
         return(
           <Review
           key={review.id}
           id={review.id}
           rating={review.rating}
           comment={review.comment}
-          username={reviewUsers[counter].name}
+          username={reviewUserHolder}
           reviewUser={review.user_id}
           isAdmin={isAdmin}
           userId ={userId}
@@ -239,9 +274,14 @@ class App extends Component {
           onClickFunction={this.handleEditClicked}
           revealed={revealedEdit}
           createdAt={createdAt}
+          handleUpVote={handleUpVote}
+          handleDownVote={handleDownVote}
+          upVotes={review.up_votes}
+          downVotes={review.down_votes}
+
+
           />
         );
-      }
     });
     if (this.state.user !== null) {
     return(

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170125161045) do
+ActiveRecord::Schema.define(version: 20170125185127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,11 +40,13 @@ ActiveRecord::Schema.define(version: 20170125161045) do
 
   create_table "reviews", force: :cascade do |t|
     t.string   "comment"
-    t.integer  "user_id",    null: false
-    t.integer  "game_id",    null: false
-    t.string   "rating",     null: false
+    t.integer  "user_id",                null: false
+    t.integer  "game_id",                null: false
+    t.string   "rating",                 null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "up_votes",   default: 0
+    t.integer  "down_votes", default: 0
     t.index ["game_id"], name: "index_reviews_on_game_id", using: :btree
     t.index ["user_id"], name: "index_reviews_on_user_id", using: :btree
   end
