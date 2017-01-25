@@ -1,11 +1,13 @@
 <div id='pad'>
   <h2>User List</h2>
   <% @users.each do |user| %>
-    <div class='small-1 columns'>
+  <div class='small-12 columns'>
+    <div class='small-2 columns'>
       <h3><%= user.name %></h3>
     </div>
-    <div class='small-11 columns'>
+    <div class='small-10 columns'>
       <%= button_to "Delete User Account", user, method: :delete, data: { confirm: "You sure?" } %>
     </div>
+  </div>
   <% end %>
 </div>

@@ -26,7 +26,7 @@ gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # foundation Formatting
-gem 'foundation-rails'
+gem 'foundation-rails', "6.2.4.0"
 # devise for making user accounts
 gem 'devise'
 # Enables serving assets in production and logging aggregation
@@ -34,6 +34,7 @@ gem 'rails_12factor', group: :production
 gem 'httpclient'
 gem 'json'
 gem 'carrierwave', '~> 1.0'
+gem 'image_magick'
 gem 'mini_magick'
 gem 'mailcatcher'
 gem 'dotenv-rails'
