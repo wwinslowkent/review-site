@@ -15,8 +15,4 @@ feature 'profile photo' do
     expect(page).to have_content "Welcome! You have signed up successfully."
 
   end
-
-  scenario 'user attaches a picture' do
-    FactoryGirl.create(:user)
-  end
 end

@@ -11,8 +11,7 @@
         <% if user_signed_in? %>
           Logged in as <strong><%= current_user.name %></strong>.
           <% if current_user.profile_photo? %>
-            <%= image_tag current_user.profile_photo_url(:thumb), data: {id: 'profile' }%> 
-            |
+            <%= image_tag current_user.profile_photo, id: 'profile' %> |
             <% end %>
           <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
           <%= link_to "Logout", destroy_user_session_path, method:  :delete, :class => 'navbar-link'  %>
