@@ -22,7 +22,8 @@
 /react/coverage
 .env
 
-README.md
+
+.DS_Store
 
 .DS_Store
 
