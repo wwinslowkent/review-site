@@ -26,10 +26,53 @@ class App extends Component {
     this.parseTime = this.parseTime.bind(this);
     this.handleUpVote = this.handleUpVote.bind(this);
     this.handleDownVote = this.handleDownVote.bind(this);
+    this.splitTime = this.splitTime.bind(this);
+  }
+
+  splitTime(time) {
+    let firstSplit = time.split("-");
+    let year = firstSplit[0];
+    let month = firstSplit[1];
+    let rest = firstSplit[2].split("T");
+    let day = rest[0];
+    let hms = rest[1].split(":");
+    let hour = hms[0];
+    let minute = hms[1];
+    let secStuff = hms[2].split(".");
+    let seconds = secStuff[0];
+
+    if (hour < 5) {
+      hour = hour + 19;
+    }
+    else {
+      hour = hour - 5;
+    }
+    let returnString = `${year}${month}${day}${hour}${minute}${seconds}`;
+    return parseInt(returnString);
+  }
+
+
+  sortReiews() {
+    let reviews = this.state.reviews;
+    let users = this.state.commentUsers;
+    let len = reviews.length;
+    for (var i = 0; i < len; i++) {
+      var tmp = reviews[i]; //Copy of the current element.
+      var tmpu = users[i];
+      /*Check through the sorted part and compare with the number in tmp. If large, shift the number*/
+      for (var j = i - 1; j >= 0 && (this.splitTime(reviews[j].created_at) < this.splitTime(tmp.created_at)); j--) {
+          //Shift the number
+          reviews[j + 1] = reviews[j];
+          users[j + 1] = users[j];
+      }
+      //Insert the copied number at the correct position
+      //in sorted part.
+      reviews[j + 1] = tmp;
+      users[j+1] = tmpu;
+    }
   }
 
   parseTime(time) {
-
     let firstSplit = time.split("-");
     let year = firstSplit[0];
     let month = firstSplit[1];
@@ -225,6 +268,7 @@ class App extends Component {
       userId = 0;
       userName = "test";
     }
+    this.sortReiews();
     let reviews = this.state.reviews.map(review => {
       let createdAt = this.parseTime(review.created_at);
       if (review.id == revealedKey) {
