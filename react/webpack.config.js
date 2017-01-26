@@ -15,9 +15,7 @@ var config = {
       }
     ]
   },
-  devtool: 'eval-source-map',
-  resolve: {
-    root: path.resolve('./src'),
+  devtool: 'eval-source-map'
 }
 
 if (process.env.NODE_ENV === 'production') {
