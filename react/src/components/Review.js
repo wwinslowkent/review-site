@@ -23,7 +23,7 @@ const Review = props => {
         </div>
 
         <div className="row search">
-            <input id="edit_review" type='submit' value="Actually, Nevermind" className="btn" onClick={buttonClick} />
+          <input id="edit_review" type='submit' value="Actually, Nevermind" className="btn" onClick={buttonClick} /><br/><br/>
             <form>
               <div className="input-field col s3">
                 <input type="text" name="rating" onChange={props.handleRatingChange}/>
@@ -31,11 +31,7 @@ const Review = props => {
               <div className="input-field col s3">
                 <input type="text" name="comment" onChange={props.handleCommentChange}/>
               </div>
-              <div className="row">
-                <div className="col s2 offset-s5 center-align">
-                  <input id="add_review" className="btn" type="submit" value="Change Review" name="Submit" onClick={props.handleEdit}/>
-                </div>
-              </div>
+              <input id="add_review" className="btn" type="submit" value="Change Review" name="Submit" onClick={props.handleEdit}/>
             </form>
         </div>
         <hr/>
@@ -92,7 +88,7 @@ const Review = props => {
     return(
       <div>
         {props.username}: Gave this game {props.rating} out of 5 stars<br/>
-        Comment: {props.comment}
+        Comment: {props.comment}<br/>
         <h9>Posted at {props.createdAt}</h9>
 
         <hr/>

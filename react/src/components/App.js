@@ -295,6 +295,7 @@ class App extends Component {
           clicked={clicked}
           userId={userId}
         />
+        <hr/>
         {reviews}
 
         </div>
@@ -303,8 +304,9 @@ class App extends Component {
       else {
         return (
         <div>
+        <hr/>
           {reviews}
-          </div>
+        </div>
         );
       }
 

@@ -119,6 +119,7 @@ input[type="button"], input[type="submit"] {
   font-size: 100%;
   padding: 1% 4%;
   background-color: #FCFAF9;
+  margin-bottom: 1vw;
 }
 
 #pad {
@@ -175,4 +176,14 @@ input[type="button"], input[type="submit"] {
 #profile{
   height: 2vw;
   width: 2vw;
+}
+
+#profilepage {
+  height: 15vw;
+  width: 15vw;
+  padding: 5%;
+}
+
+#down {
+  padding-top: 2vw;
 }

@@ -2,10 +2,11 @@
 
 <div class='small-12 columns' id='gameshow'>
   <img src="https://<%= @game.cover_url %>" class='small-2 columns'></img>
-  <h1 class='small-10 columns'><%= @game.name %></h1>
+  <h1 class='small-10 columns' id='ha'><%= @game.name %></h1>
+
   <% if admin_signed_in? %>
-        <%= button_to "Edit Game", edit_game_path, method: :get %>
-      <% end %>
+    <%= button_to "Edit Game", edit_game_path, method: :get %>
+  <% end %>
 </div>
 
 <div id = 'ha'>

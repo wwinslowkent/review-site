@@ -298,8 +298,8 @@ DEPENDENCIES
   json
   launchy
   listen (~> 3.0.5)
+  mailcatcher
   mini_magick
-
   pg (~> 0.18)
   pry-rails
   puma (~> 3.0)

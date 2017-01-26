@@ -13,9 +13,10 @@ class Api::V1::ReviewsController < ApplicationController
 
   def destroy
     data = JSON.parse(request.body.read)
-    review = Review.find(data["id"])
+    @review = Review.find(data["id"])
     @game = Game.find(params[:game_id])
-    if review.delete
+    ReviewMailer.delete_review(@review, @game).deliver_now
+    if @review.delete
       @reviews = @game.reviews
       render json: @reviews
     end

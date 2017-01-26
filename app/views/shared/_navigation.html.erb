@@ -9,7 +9,7 @@
     <div class="title-bar-right">
 
         <% if user_signed_in? %>
-          Logged in as <strong><%= current_user.name %></strong>.
+          Logged in as <strong><%= link_to current_user.name, user_path(current_user) %></strong>.
           <% if current_user.profile_photo? %>
             <%= image_tag current_user.profile_photo, id: 'profile' %> |
             <% end %>

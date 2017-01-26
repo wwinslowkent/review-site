@@ -29,7 +29,11 @@ Rails.application.routes.draw do
   resources :admins, only: [:index]
   match 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
 
-  resources :users
+  resources :users do
+    member do
+      get 'preview'
+    end
+  end
 
   resources :gamerequests
 end
