@@ -1,0 +1,35 @@
+<div id='pad' class='small-12 columns'>
+
+  <div class='large-3 columns medium-5 columns small-12 columns' id='down'>
+
+
+  <% if @user.profile_photo? %>
+
+    <%= image_tag @user.profile_photo, id: 'profilepage'%>
+    <%= button_to 'Remove Profile Photo', preview_user_path, method: :get %>
+
+    <% else %>
+
+    <%= image_tag 'man.png', id: 'profilepage'%>
+    <%= button_to 'Add Profile Photo', edit_user_registration_path(@user), method: :get %>
+
+  <% end %>
+    </div>
+    <div class='large-9 columns medium-7 columns'>
+
+
+  <h1><%= @user.name %></h1></div>
+
+  <h3>Your Reviews:</h3>
+  <% if @reviews == [] %>
+    <p>You don't have any reviews yet!</p>
+    <% else %>
+    <% @reviews.each do |review| %>
+      <p>
+        <%= link_to review.game.name, game_path(review.game)  %>: <br />
+        Your rating: <%= review.rating %> out of 5 <br />
+        Your comment: '<%= review.comment %>'
+      </p>
+    <% end %>
+<% end %>
+</div>

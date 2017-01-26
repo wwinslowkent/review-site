@@ -34,7 +34,6 @@ gem 'rails_12factor', group: :production
 gem 'httpclient'
 gem 'json'
 gem 'carrierwave', '~> 1.0'
-gem 'mailcatcher'
 gem 'fog'
 gem 'dotenv-rails'
 
@@ -47,7 +46,6 @@ group :development, :test do
   gem 'valid_attribute'
   gem 'shoulda-matchers', require: false
   gem 'rb-readline'
-  gem 'dotenv-rails'
 end
 
 group :development do
@@ -58,6 +56,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'mailcatcher'
 end
 group :test do
   gem 'coveralls', require: false
