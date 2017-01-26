@@ -7,20 +7,17 @@ const Review = props => {
     if (props.revealed){
       return(
         <div>
-        {props.username}: Gave this game {props.rating} out of 5 stars<br/>
-        Comment: {props.comment}<br/>
-        <h9>Posted at {props.createdAt}</h9>
-        <p className="col s2 offset-s5 center-align">
-        <input id="delete" className="btn" type="submit" value="Up Vote" name="Delete" onClick={props.handleUpVote}/> <br/>
-       Score:{props.upVotes - props.downVotes} <br/>
-       <input id="delete" className="btn" type="submit" value="Down Vote" name="Delete" onClick={props.handleDownVote}/>
-     </p>
+        <br/>
+        <input id="delete" className="button tiny button hollow button success" type="submit" value="Up Vote" name="Delete" onClick={props.handleUpVote}/> &#8196;&#8196;&#8196;&#8196;&#8196;&#8196; {props.username}: Gave this game {props.rating} out of 5 stars<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8196;&#8196;&#8196;{props.upVotes - props.downVotes}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8196;&#8196;&#8196;&#8196;&#8196;&#8196;&#8196;&#8196;Comment: {props.comment}<br/>
+        <input id="delete" className="button tiny button hollow button alert" type="submit" value="Down Vote" name="Delete" onClick={props.handleDownVote}/>&#8196;&#8196;&#8196;&#8196;&#8196;<h9>Posted at {props.createdAt}</h9>
+
         <div className="col s2 offset-s5 center-align">
           <input id="delete" className="btn" type="submit" value="Delete" name="Delete" onClick={buttonClick}/>
         </div>
 
         <div className="row search">
-            anyu <input id="edit_review" type='submit' value="Actually, Nevermind" className="btn" onClick={buttonClick} />
+              <input id="edit_review" type='submit' value="Actually, Nevermind" className="btn" onClick={buttonClick} />
             <form>
               <div className="input-field col s3">
                 <input type="text" name="rating" defaultValue={props.rating} onChange={props.handleRatingChange}/>
@@ -43,7 +40,7 @@ const Review = props => {
         <div>
         <br/>
         <input id="delete" className="button tiny button hollow button success" type="submit" value="Up Vote" name="Delete" onClick={props.handleUpVote}/> &#8196;&#8196;&#8196;&#8196;&#8196;&#8196; {props.username}: Gave this game {props.rating} out of 5 stars<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8196;&#8196;&#8196;{props.upVotes - props.downVotes}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8196;&#8196; Comment: {props.comment}<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8196;&#8196;&#8196;{props.upVotes - props.downVotes}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8196;&#8196;&#8196;&#8196;&#8196;&#8196;&#8196;&#8196;Comment: {props.comment}<br/>
         <input id="delete" className="button tiny button hollow button alert" type="submit" value="Down Vote" name="Delete" onClick={props.handleDownVote}/>&#8196;&#8196;&#8196;&#8196;&#8196;<h9>Posted at {props.createdAt}</h9>
 
         <div className="col s2 offset-s5 center-align">
@@ -58,14 +55,11 @@ const Review = props => {
   else if(props.isAdmin) {
     return(
       <div>
-        {props.username}: Gave this game {props.rating} out of 5 stars<br/>
-        Comment: {props.comment}<br/>
-        <h9>Posted at {props.createdAt}</h9>
-        <p className="col s2 offset-s5 center-align">
-        <input id="delete" className="btn" type="submit" value="Up Vote" name="Delete" onClick={props.handleUpVote}/> <br/>
-       Score:{props.upVotes - props.downVotes} <br/>
-       <input id="delete" className="btn" type="submit" value="Down Vote" name="Delete" onClick={props.handleDownVote}/>
-     </p>
+      <br/>
+      <input id="delete" className="button tiny button hollow button success" type="submit" value="Up Vote" name="Delete" onClick={props.handleUpVote}/> &#8196;&#8196;&#8196;&#8196;&#8196;&#8196; {props.username}: Gave this game {props.rating} out of 5 stars<br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8196;&#8196;&#8196;{props.upVotes - props.downVotes}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8196;&#8196;&#8196;&#8196;&#8196;&#8196;&#8196;&#8196;Comment: {props.comment}<br/>
+      <input id="delete" className="button tiny button hollow button alert" type="submit" value="Down Vote" name="Delete" onClick={props.handleDownVote}/>&#8196;&#8196;&#8196;&#8196;&#8196;<h9>Posted at {props.createdAt}</h9>
+
         <div className="col s2 offset-s5 center-align">
           <input id="delete" className="btn" type="submit" value="Delete" name="Delete" onClick={props.handleDelete}/>
         </div>
@@ -73,6 +67,17 @@ const Review = props => {
       </div>
     );
 
+  }
+  else if(props.userId != 0 ) {
+    return(
+      <div>
+      <br/>
+      <input id="delete" className="button tiny button hollow button success" type="submit" value="Up Vote" name="Delete" onClick={props.handleUpVote}/> &#8196;&#8196;&#8196;&#8196;&#8196;&#8196; {props.username}: Gave this game {props.rating} out of 5 stars<br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8196;&#8196;&#8196;{props.upVotes - props.downVotes}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8196;&#8196;&#8196;&#8196;&#8196;&#8196;&#8196;&#8196;Comment: {props.comment}<br/>
+      <input id="delete" className="button tiny button hollow button alert" type="submit" value="Down Vote" name="Delete" onClick={props.handleDownVote}/>&#8196;&#8196;&#8196;&#8196;&#8196;<h9>Posted at {props.createdAt}</h9>
+        <hr/>
+      </div>
+    );
   }
   else {
     return(

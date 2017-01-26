@@ -10,7 +10,7 @@ class Api::V1::GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    @reviews = @game.reviews
+    @reviews = @game.reviews.order(:created_at).reverse
     @user = current_user
     @commentUsers = []
     @isAdmin = admin_signed_in?
