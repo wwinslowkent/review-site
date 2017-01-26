@@ -428,8 +428,9 @@ DEPENDENCIES
   dotenv-rails
   factory_girl_rails
   fog
-  foundation-rails
+  foundation-rails (= 6.2.4.0)
   httpclient
+  image_magick
   jbuilder (~> 2.5)
   jquery-rails
   json

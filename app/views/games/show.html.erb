@@ -18,7 +18,7 @@
   <% else %>
     <%= button_to 'Sign In to Post a Review', new_user_session_path %>
   <% end %>
-  <div id="app"></div>
+  <div id="app" data-id="<%= @game.id %>"> </div>
 
 
 
