@@ -14,7 +14,7 @@ class App extends Component {
       user: null,
       commentUsers: [],
       isAdmin: false,
-      revealedKey: null
+      revealedKey: null,
 
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,51 +26,9 @@ class App extends Component {
     this.parseTime = this.parseTime.bind(this);
     this.handleUpVote = this.handleUpVote.bind(this);
     this.handleDownVote = this.handleDownVote.bind(this);
-    this.splitTime = this.splitTime.bind(this);
-  }
-
-  splitTime(time) {
-    let firstSplit = time.split("-");
-    let year = firstSplit[0];
-    let month = firstSplit[1];
-    let rest = firstSplit[2].split("T");
-    let day = rest[0];
-    let hms = rest[1].split(":");
-    let hour = hms[0];
-    let minute = hms[1];
-    let secStuff = hms[2].split(".");
-    let seconds = secStuff[0];
-
-    if (hour < 5) {
-      hour = hour + 19;
-    }
-    else {
-      hour = hour - 5;
-    }
-    let returnString = `${year}${month}${day}${hour}${minute}${seconds}`;
-    return parseInt(returnString);
   }
 
 
-  sortReiews() {
-    let reviews = this.state.reviews;
-    let users = this.state.commentUsers;
-    let len = reviews.length;
-    for (var i = 0; i < len; i++) {
-      var tmp = reviews[i]; //Copy of the current element.
-      var tmpu = users[i];
-      /*Check through the sorted part and compare with the number in tmp. If large, shift the number*/
-      for (var j = i - 1; j >= 0 && (this.splitTime(reviews[j].created_at) < this.splitTime(tmp.created_at)); j--) {
-          //Shift the number
-          reviews[j + 1] = reviews[j];
-          users[j + 1] = users[j];
-      }
-      //Insert the copied number at the correct position
-      //in sorted part.
-      reviews[j + 1] = tmp;
-      users[j+1] = tmpu;
-    }
-  }
 
   parseTime(time) {
     let firstSplit = time.split("-");
@@ -131,7 +89,6 @@ class App extends Component {
   handleEdit(reviewId) {
     let pageId = parseInt(document.getElementById('app').dataset.id);
     event.preventDefault();
-
     let fetchBody = { rating: this.state.rating,  comment: this.state.comment, id: reviewId, type: "update" };
     let newReviews = [];
     fetch(`../api/v1/games/${pageId}/reviews/${reviewId}`,
@@ -140,18 +97,21 @@ class App extends Component {
       .then(function(response) {
         newReviews = response.json();
         return newReviews;
-      }).then((response) =>
+      }).then((response) => {
       this.setState({
-        reviews: response,
+        reviews: response.reviews,
         rating: "",
         comment: "",
-        editReview: false
-      })
+        editReview: false,
+        commentUsers: response.users
+      });
+      }
     );
   }
 
   handleUpVote(reviewId) {
     let pageId = parseInt(document.getElementById('app').dataset.id);
+
     event.preventDefault();
     let fetchBody = { id: reviewId, type: "upvote" };
     let newReviews = [];
@@ -162,12 +122,7 @@ class App extends Component {
         newReviews = response.json();
         return newReviews;
       }).then((response) =>
-      this.setState({
-        reviews: response,
-        rating: "",
-        comment: "",
-        editReview: false
-      })
+      this.setState({ reviews: response.reviews, commentUsers: response.users })
     );
   }
 
@@ -180,16 +135,10 @@ class App extends Component {
       { method: "PATCH",
       body: JSON.stringify(fetchBody) })
       .then(function(response) {
-
         newReviews = response.json();
         return newReviews;
       }).then((response) =>
-      this.setState({
-        reviews: response,
-        rating: "",
-        comment: "",
-        editReview: false
-      })
+      this.setState({ reviews: response.reviews, commentUsers: response.users })
     );
   }
 
@@ -198,8 +147,8 @@ class App extends Component {
     event.preventDefault();
     let fetchBody = { rating: this.state.rating,  comment: this.state.comment, userId: this.state.user.id };
     let newReviews = [];
-    let newUserArr = this.state.commentUsers;
-    newUserArr.push(this.state.user);
+  //  let newUserArr = this.state.commentUsers;
+    //newUserArr.push(this.state.user);
     fetch(`../api/v1/games/${pageId}/reviews`,
       { method: "POST",
       body: JSON.stringify(fetchBody) })
@@ -208,11 +157,11 @@ class App extends Component {
         return newReviews;
       }).then((response) =>
       this.setState({
-        reviews: response,
+        reviews: response.reviews,
         rating: "",
         comment: "",
         clicked: false,
-        commentUsers: newUserArr
+        commentUsers: response.users
       })
     );
   }
@@ -228,7 +177,7 @@ class App extends Component {
     newReviews = response.json();
     return newReviews;
   })
-  .then((response) => this.setState({ reviews: response }));
+  .then((response) => this.setState({ reviews: response.reviews, commentUsers: response.users }));
   }
 
   componentDidMount(){
@@ -243,7 +192,7 @@ class App extends Component {
         reviews: data.reviews,
         user: data.user,
         commentUsers: data.commentUsers,
-        isAdmin: data.isAdmin
+        isAdmin: data.isAdmin,
       });
     });
   }
@@ -268,7 +217,7 @@ class App extends Component {
       userId = 0;
       userName = "test";
     }
-    this.sortReiews();
+
     let reviews = this.state.reviews.map(review => {
       let createdAt = this.parseTime(review.created_at);
       if (review.id == revealedKey) {
