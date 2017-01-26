@@ -14,10 +14,15 @@ class Api::V1::ReviewsController < ApplicationController
   def destroy
     data = JSON.parse(request.body.read)
     review = Review.find(data["id"])
+    @commentUsers = []
     @game = Game.find(params[:game_id])
     if review.delete
-      @reviews = @game.reviews
-      render json: @reviews
+      @reviews = @game.reviews.order(:created_at).reverse
+      @reviews.each do |review|
+        user = User.find(review.user_id)
+        @commentUsers << user
+      end
+      render json: {reviews: @reviews, users: @commentUsers }
     end
   end
 
@@ -25,9 +30,9 @@ class Api::V1::ReviewsController < ApplicationController
     #data is the fetch request
     data = JSON.parse(request.body.read)
     props = {}
-
     review = Review.find(data["id"])
     @game = review.game
+    @commentUsers = []
     if (data["type"] == "update")
       props["comment"] = data["comment"]
       props["rating"] = data["rating"]
@@ -35,19 +40,31 @@ class Api::V1::ReviewsController < ApplicationController
       review.rating = data["rating"]
       review.comment = data["comment"]
       review.save
-      @reviews = @game.reviews
+      @reviews = @game.reviews.order(:created_at).reverse
+      @reviews.each do |review|
+        user = User.find(review.user_id)
+        @commentUsers << user
+      end
     end
     if (data["type"] == "upvote")
       review.up_votes += 1
       review.save
-      @reviews = @game.reviews
+      @reviews = @game.reviews.order(:created_at).reverse
+      @reviews.each do |review|
+        user = User.find(review.user_id)
+        @commentUsers << user
+      end
     end
     if (data["type"] == "downvote")
       review.down_votes += 1
       review.save
-      @reviews = @game.reviews
+      @reviews = @game.reviews.order(:created_at).reverse
+      @reviews.each do |review|
+        user = User.find(review.user_id)
+        @commentUsers << user
+      end
     end
-    render json: @reviews
+    render json: {reviews: @reviews, users: @commentUsers }
   end
 
   def create
@@ -58,11 +75,15 @@ class Api::V1::ReviewsController < ApplicationController
     @review = Review.new(comment: data["comment"], rating: data["rating"])
     @review.user = @user
     @review.game = @game
-
+    @commentUsers = []
 
     if @review.save!
-      @reviews = @game.reviews
-      render json: @reviews
+      @reviews = @game.reviews.order(:created_at).reverse
+      @reviews.each do |review|
+        user = User.find(review.user_id)
+        @commentUsers << user
+      end
+      render json: {reviews: @reviews, users: @commentUsers }
     else
       render json: {message: "Did not work"}, status: 404
     end
