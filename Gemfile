@@ -34,8 +34,9 @@ gem 'rails_12factor', group: :production
 gem 'httpclient'
 gem 'json'
 gem 'carrierwave', '~> 1.0'
-gem 'mini_magick'
+# gem 'mini_magick'
 gem 'mailcatcher'
+gem 'fog'
 
 group :development, :test do
   gem 'pry-rails'
@@ -46,6 +47,7 @@ group :development, :test do
   gem 'valid_attribute'
   gem 'shoulda-matchers', require: false
   gem 'rb-readline'
+  gem 'dotenv-rails'
 end
 
 group :development do
