@@ -74,8 +74,4 @@ ActiveRecord::Schema.define(version: 20170125185127) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  create_table "votes", force: :cascade do |t|
-    t.string "vote", null: false
-  end
-
 end
