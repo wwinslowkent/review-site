@@ -13,7 +13,7 @@
           <% if current_user.profile_photo? %>
             <%= image_tag current_user.profile_photo, id: 'profile' %>
             <% else %>
-            <%= image_tag 'default.png', id: 'profile' %>
+            <%= image_tag 'man.png', id: 'profile' %>
 
             <% end %>
           <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
