@@ -34,7 +34,7 @@ gem 'rails_12factor', group: :production
 gem 'httpclient'
 gem 'json'
 gem 'carrierwave', '~> 1.0'
-gem 'fog'
+gem 'fog-aws'
 gem 'dotenv-rails'
 
 group :development, :test do
