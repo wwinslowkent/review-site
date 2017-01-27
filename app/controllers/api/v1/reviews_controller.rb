@@ -16,7 +16,7 @@ class Api::V1::ReviewsController < ApplicationController
     review = Review.find(data["id"])
     @commentUsers = []
     @game = Game.find(params[:game_id])
-    ReviewMailer.delete_review(@review, @game).deliver_now
+    ReviewMailer.delete_review(review, @game).deliver_now
     if review.delete
       @reviews = @game.reviews.order(:created_at).reverse
       @reviews.each do |review|

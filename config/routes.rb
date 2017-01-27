@@ -36,4 +36,6 @@ Rails.application.routes.draw do
   end
 
   resources :gamerequests
+
+  resources :splash
 end
